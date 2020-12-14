@@ -1,0 +1,212 @@
+<template>
+    <el-card class="box-card">
+      <el-row class="clearfix">
+        <div class="searh-row flex">
+          <el-input size="small" v-model="order_title" placeholder="请输入订单编号" style="width:200pxpx"></el-input>
+          <el-button size="small" type="info" plain @click="getOrderData">搜索</el-button>
+        </div>
+      </el-row>
+
+      <table class="table" style="border:0">
+        <thead>
+          <tr class="bg-light">
+            <td>商品信息</td>
+            <td class="text-center" style="width:100px">实付金额</td>
+            <td class="text-center" style="width:100px">支付方式</td>
+            <td class="text-center" style="width:100px">订单状态</td>
+            <td class="text-center" style="width:100px">配送费用</td>
+            <td class="text-center" style="width:100px">买家信息</td>
+            <td class="text-center" style="width:100px">操作</td>
+          </tr>
+        </thead>
+      </table>
+   
+      <table class="table" :key="order.order_id" v-for="order in orderData.items">
+        <thead>
+          <tr class="bg-dark">
+            <td colspan="7" class="bd-bottem">
+              <span>{{order.order_id}}</span>
+              <span>下单时间：{{order.order_time}}</span>
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr :key="item.order_item_id" v-for="(item,key) in order.items">
+            <td class="bd-right" :class="{multiple:order.items.length > 1}">
+              <div class="goods-box">
+                <img class="goods-image" :src="item.item_image" >
+                <dl class="goods-info">
+                  <dt>{{item.item_name}}</dt>
+                  <dd>¥{{item.order_item_price}} x {{item.order_item_quantity}}</dd>
+                </dl>
+              </div>
+            </td>
+            <td class="text-center bd-right" :rowspan="order.items.length" style="width:100px" v-if="key == 0">
+              <span style="color:red">¥ {{order.order_payment_amount}}</span>
+            </td>
+            <td class="text-center bd-right" :rowspan="order.items.length" style="width:100px" v-if="key == 0">
+              {{order.payment_name}}
+            </td>
+            <td class="text-center bd-right" :rowspan="order.items.length" style="width:100px" v-if="key == 0">
+              <el-tag size="medium">{{ order.order_status_name }}</el-tag>
+            </td>
+            <td class="text-center bd-right" :rowspan="order.items.length" style="width:100px" v-if="key == 0">
+              {{order.buyer_name}}
+            </td>
+            <td class="text-center bd-right" :rowspan="order.items.length" style="width:100px" v-if="key == 0">
+              {{order.freight}}
+            </td>
+            <td class="text-center" :rowspan="order.items.length" style="width:100px" v-if="key == 0">
+              <a href="javascript:;" @click="detail(order.order_id)">详情</a>
+            </td>
+          </tr>
+
+    
+        
+        </tbody>
+      </table>
+
+      <el-pagination
+        background
+        layout="prev, pager, next"
+        :total="orderData.records"
+        style="padding:20px 0;float:right"
+        @current-change="changePage"
+        v-if="orderData.total > 1"
+        >
+      </el-pagination>
+    </el-card>
+</template>
+<script>
+import { orderLists,returnLists } from '@/api/order'
+export default {
+    data() {
+      return {
+        orderData : {
+          page:1,
+          records:0,
+          total:0,
+          more:true,
+          items:[]
+        },
+        order_id:'',
+        return_id:'',
+        selection:[],
+        loading:false,
+        activeName:'first',
+        order_title:''
+      };
+    },
+    methods: {
+      getOrderData( data ){
+        let params = {
+          order_id:this.order_title,
+          rows:10,
+          page:1
+        };
+
+        Object.assign(params, data);
+
+        this.loading = true;
+        orderLists( params ).then( res => {
+          this.orderData = res.data;
+          this.loading = false;
+        })
+      },
+      getReturnData( data ){
+        let params = {
+          return_id:this.return_id,
+          rows:10,
+          page:1
+        };
+
+        Object.assign(params, data);
+
+        this.loading = true;
+        returnLists( params ).then( res => {
+          this.returnData = res.data;
+          this.loading = false;
+        })
+      },
+
+      changePage( page ){
+        this.getOrderData({page:page})
+      },
+      handleSelectionChange(val) {
+        this.multipleSelection = val;
+      },
+      detail(id){
+        this.$router.push("orderDetail/" + id);
+      },
+      returnDetail(id){
+        this.$router.push("returnDetail/" + id);
+      },
+      goback() {
+        this.$router.go(-1);
+      }
+    },
+    created(){
+      this.getOrderData();
+      this.getReturnData();
+    }
+  };
+</script>
+<style>
+.flex {
+  display:flex;
+}
+.pull-left {
+  float:left;
+}
+.pull-right {
+  float:right;
+}
+.table {
+  width: 100%;
+  font-size:14px;
+  border: 1px solid #dddee1;
+  margin-top: 10px;
+  border-spacing:0;  
+  color: #606266;
+}
+.table th,
+.table td {
+  padding:12px 10px;
+}
+.bd-bottem {
+  border-bottom:1px solid #dddee1;
+}
+
+.bd-right {
+  border-right:0px solid #dddee1;
+}
+.bg-dark {
+  background-color: #f8f8f9;
+}
+.bg-light {
+  background-color: #e8f7f6;
+}
+.text-center {
+  text-align: center;
+}
+.goods-box {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.goods-box .goods-image {
+  width: 80px;
+}
+
+.goods-box .goods-info{
+  line-height: 20px;
+  margin-left: 10px;
+} 
+.multiple {
+  padding: 5px 0;
+}
+.multiple .goods-image {
+  width: 60px;
+}
+
+</style>
