@@ -2,7 +2,7 @@
     <el-card class="box-card">
       <div slot="header" class="clearfix" style="position:relative">
         <span>单位管理</span>
-        <div class="goback" @click="goback"><i class="el-icon-back back"></i>返回上一级</div>
+        <div class="goback" @click="goback"><i class="el-icon-back back"></i>返回</div>
       </div>
 
       <div>
@@ -265,18 +265,4 @@ export default {
       top:-6px;
       right:0;
     }
-
-  .goback{
-    display: inline-block;
-    float:right;
-     vertical-align: middle;
-     color: #409EFF;
-
-  }
-  .back{
-    font-size: 21px;
-    vertical-align: middle;
-    color: #409EFF;
-  }
-
 </style>

@@ -1,41 +1,11 @@
 
 import axios from 'axios'
-import qs from 'qs'
-import { getCookie } from '@/utils/cookie'
+
 
 // request interceptor
 axios.interceptors.request.use(
   config => {
     // do something before request is sent
-
-    if (getCookie('ukey') && getCookie('ukey') != 'undefined') {
-        // 注意：config.method 的判断值必须是小写的post和get
-        if (config.method === 'post') {
-            config.data = {
-                perm_key: getCookie('ukey'),
-                ...config.data
-            }
-        } else if (config.method === 'get') {
-            config.params = {
-                perm_key: getCookie('ukey'),
-                ...config.params
-            }
-        }
-    }
-    if( getCookie('uid') && getCookie('uid') != 'undefined' ){
-         // 注意：config.method 的判断值必须是小写的post和get
-         if (config.method === 'post') {
-            config.data = {
-                perm_id: getCookie('uid'),
-                ...config.data
-            }
-        } else if (config.method === 'get') {
-            config.params = {
-                perm_id: getCookie('uid'),
-                ...config.params
-            }
-        }
-    }
     return config
   },
   error => {

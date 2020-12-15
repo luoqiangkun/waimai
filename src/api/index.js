@@ -1,4 +1,4 @@
-import request from '@/utils/axios'
+import request from '@/http/axios'
 
 /********************* 会员相关接口开始 **********************/
 //用户登陆
@@ -217,7 +217,7 @@ export function editStore(data) {
 }
 
 //编辑店铺营业状态
-export function editStore(data) {
+export function editStoreOpen(data) {
     return request({
       url: 'catering?ctl=Store_Base&met=open&typ=json',
       method: 'post',

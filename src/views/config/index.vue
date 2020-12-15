@@ -55,8 +55,8 @@
           </el-form-item>
 
           <el-form-item>
-            <el-button type="primary" @click="onSubmit2">保存</el-button>
-            <el-button>取消</el-button>
+            <el-button type="primary" size="small" @click="onSubmit2">保存</el-button>
+            <el-button size="small">取消</el-button>
           </el-form-item>
 
       </el-form>
@@ -64,7 +64,7 @@
       </div>
     </el-card>
 
-     <el-card class="box-card">
+     <el-card class="box-card" style="margin-top:10px">
       <div slot="header" class="clearfix">
         <span>其他设置</span>
       </div>
@@ -91,8 +91,8 @@
 					</el-form-item>
 
 					<el-form-item>
-						<el-button type="primary" @click="onSubmit3">保存</el-button>
-						<el-button>取消</el-button>
+						<el-button type="primary" size="small" @click="onSubmit3">保存</el-button>
+						<el-button size="small">取消</el-button>
 					</el-form-item>
 
 				</el-form>

@@ -425,16 +425,5 @@ export default {
 .form-bottom {
 	margin-top:20px;
 }
-.goback{
-  display: inline-block;
-  float:right;
-   vertical-align: middle;
-   color: #409EFF;
 
-}
-.back{
-  font-size: 21px;
-  vertical-align: middle;
-  color: #409EFF;
-}
 </style>

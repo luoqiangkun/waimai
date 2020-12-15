@@ -19,13 +19,14 @@ import reductionManage from '@/views/activity/reductionManage'
 
 import order from '@/views/order'
 import orderDetail from '@/views/order/detail'
+import returnList from '@/views/return'
 import returnDetail from '@/views/return/detail'
-//import comment from '@/views/comment'
-//import commentDetail from '@/views/comment/detail'
+import comment from '@/views/comment'
+import commentDetail from '@/views/comment/detail'
 
 import config from '@/views/config'
 import waiter from '@/views/waiter'
-//import delivery from '@/views/delivery'
+import delivery from '@/views/delivery'
 
 Vue.use(Router)
 
@@ -108,16 +109,21 @@ export default new Router({
           name: 'returnDetail',
           component: returnDetail,
         },
-        // {
-        //   path: 'comment',
-        //   name: 'comment',
-        //   component: comment
-        // },
-        // {
-        //   path: 'commentDetail/:id',
-        //   name: 'commentDetail',
-        //   component: commentDetail
-        // },
+        {
+          path: 'return',
+          name: 'return',
+          component: returnList
+        },
+        {
+          path: 'comment',
+          name: 'comment',
+          component: comment
+        },
+        {
+          path: 'commentDetail/:id',
+          name: 'commentDetail',
+          component: commentDetail
+        },
         {
           path: 'activity',
           name: 'activity',
@@ -148,11 +154,11 @@ export default new Router({
           name: 'waiter',
           component: waiter
         },
-        // {
-        //   path: 'delivery',
-        //   name: 'delivery',
-        //   component: delivery
-        // }
+        {
+          path: 'delivery',
+          name: 'delivery',
+          component: delivery
+        }
       ]
     },
   ],

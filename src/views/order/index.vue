@@ -2,14 +2,14 @@
     <el-card class="box-card">
       <el-row class="clearfix">
         <div class="searh-row flex">
-          <el-input size="small" v-model="order_title" placeholder="请输入订单编号" style="width:200pxpx"></el-input>
+          <el-input size="small" v-model="order_title" placeholder="请输入订单编号" style="width:200px"></el-input>
           <el-button size="small" type="info" plain @click="getOrderData">搜索</el-button>
         </div>
       </el-row>
 
       <table class="table" style="border:0">
         <thead>
-          <tr class="bg-light">
+          <tr class="bg-dark">
             <td>商品信息</td>
             <td class="text-center" style="width:100px">实付金额</td>
             <td class="text-center" style="width:100px">支付方式</td>
@@ -23,7 +23,7 @@
    
       <table class="table" :key="order.order_id" v-for="order in orderData.items">
         <thead>
-          <tr class="bg-dark">
+          <tr class="bg-light">
             <td colspan="7" class="bd-bottem">
               <span>{{order.order_id}}</span>
               <span>下单时间：{{order.order_time}}</span>
@@ -51,18 +51,17 @@
               <el-tag size="medium">{{ order.order_status_name }}</el-tag>
             </td>
             <td class="text-center bd-right" :rowspan="order.items.length" style="width:100px" v-if="key == 0">
-              {{order.buyer_name}}
-            </td>
-            <td class="text-center bd-right" :rowspan="order.items.length" style="width:100px" v-if="key == 0">
               {{order.freight}}
             </td>
-            <td class="text-center" :rowspan="order.items.length" style="width:100px" v-if="key == 0">
-              <a href="javascript:;" @click="detail(order.order_id)">详情</a>
+            <td class="text-center bd-right" :rowspan="order.items.length" style="width:100px" v-if="key == 0">
+              {{order.buyer_name}}
             </td>
-          </tr>
 
-    
-        
+            <td class="text-center bd-right" :rowspan="order.items.length" style="width:100px" v-if="key == 0">
+              <el-button size="mini" type="primary" @click="detail(order.order_id)">详情</el-button>
+            </td>
+
+          </tr>
         </tbody>
       </table>
 
@@ -165,7 +164,7 @@ export default {
   width: 100%;
   font-size:14px;
   border: 1px solid #dddee1;
-  margin-top: 10px;
+  margin-top: 15px;
   border-spacing:0;  
   color: #606266;
 }
@@ -178,7 +177,13 @@ export default {
 }
 
 .bd-right {
-  border-right:0px solid #dddee1;
+  border-right:1px solid #dddee1;
+}
+.bd-bottem {
+  border-bottom:1px solid #dddee1;
+}
+.bd-top {
+  border-top:1px solid #dddee1;
 }
 .bg-dark {
   background-color: #f8f8f9;
@@ -188,6 +193,9 @@ export default {
 }
 .text-center {
   text-align: center;
+}
+.text-right {
+  text-align: right;
 }
 .goods-box {
   display: flex;
