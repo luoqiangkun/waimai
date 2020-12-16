@@ -70,6 +70,6 @@ a {
   padding-bottom: 0;
 }
 .el-card__header {
-      padding: 12px 20px;
+      padding: 10px 20px;
 }
 </style>

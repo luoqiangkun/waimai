@@ -41,7 +41,7 @@
             width="200"
            >
             <template slot-scope="scope">
-              <el-button type="primary" size="mini">详情</el-button>
+              <el-button type="primary" size="mini" @click="detail(scope.row.order_id)">详情</el-button>
             </template>
           </el-table-column>
       </el-table>
@@ -59,7 +59,6 @@
 </template>
 <script>
 import { commentLists } from '@/api/order'
-console.log( commentLists )
 export default {
     data() {
       return {
@@ -95,7 +94,9 @@ export default {
       handleRefresh(){
         this.getData();
       },
-    
+      detail(id){
+        this.$router.push("commentDetail/" + id);
+      },
       goback() {
         this.$router.go(-1);
       }

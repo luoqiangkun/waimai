@@ -1,5 +1,5 @@
 import { getCookie,setCookie,delCookie} from '@/utils/cookie'
-import { login,userInfo,logout } from '@/api'
+import { login,logout } from '@/api'
 
 const state = {
     authToken:''
