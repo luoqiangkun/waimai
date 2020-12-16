@@ -63,7 +63,7 @@ const actions = {
           resolve( res.data )
 
         } else {
-          reject('登录失败，请重新登录')
+          reject(res.msg)
         }
         
       }).catch(error => {

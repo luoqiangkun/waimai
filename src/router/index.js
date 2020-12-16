@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import login from '@/views/login'
-import layout from '@/views/layout'
+import layout from '@/views/layout/default/'
 import dashboard from '@/views/dashboard'
 import shop from '@/views/shop'
 import table from '@/views/table'
@@ -27,6 +27,21 @@ import commentDetail from '@/views/comment/detail'
 import config from '@/views/config'
 import waiter from '@/views/waiter'
 import delivery from '@/views/delivery'
+import error404 from '@/views/error/404'
+
+//商家入驻
+import Settled from '@/views/settled'
+import SettledPrompt from '@/views/settled/prompt'
+import SettledStore from '@/views/settled/store'
+import SettledCompany from '@/views/settled/company'
+import SettledLegal from '@/views/settled/legal'
+import SettledResult from '@/views/settled/result'
+
+// //帮助中心
+import Help from '@/views/help'
+import HelpLists from '@/views/help/lists'
+import HelpDetail from '@/views/help/detail'
+import HelpCategory from '@/views/help/cate'
 
 Vue.use(Router)
 
@@ -161,6 +176,69 @@ export default new Router({
         }
       ]
     },
+    {
+      path:'/settled',
+      name:'Settled',
+      component: Settled,
+      //redirect: '/settled/prompt',
+      children:[
+        {
+          path:'prompt',
+          component:SettledPrompt
+        },
+        {
+          path:'store',
+          component:SettledStore
+        },
+        {
+          path:'company',
+          component:SettledCompany
+        },
+        {
+          path:'legal',
+          component:SettledLegal
+        },
+        {
+          path:'result',
+          component:SettledResult
+        }
+      ]
+    },
+    {
+      path:'/help',
+      name:'Help',
+      component: Help,
+      redirect: '/help/lists',
+      children:[
+        {
+          path:'lists/:category_id?/:keyword?',
+          component:HelpLists
+        },
+        {
+          path:'detail/:id/:rand?',
+          component:HelpDetail
+        },
+        {
+          path:'category',
+          component:HelpCategory
+        }
+      ]
+    },
+    // 404 page must be placed at the end !!!
+    {
+      path: '/404',
+      component: error404,
+      name: 'Page404',
+      meta: { 
+        title: '404', 
+        noCache: true 
+      }
+    },
+    { 
+      path: '*', 
+      redirect: '/404', 
+      hidden: true 
+    }
   ],
   linkActiveClass: "active"
 })

@@ -31,12 +31,12 @@
     
         <div class="head-topbar__item">
           <div class="avator">
-            <img :src="user.avatar" alt="" />
+            <img :src="profile.userAvatar" alt="" />
           </div>
 
           <el-dropdown trigger="click" @command="logout">
             <span class="el-dropdown-link">
-              {{user.name}}<i class="el-icon-arrow-down el-icon--right"></i>
+              {{profile.userName}}<i class="el-icon-arrow-down el-icon--right"></i>
             </span>
             <el-dropdown-menu slot="dropdown" >
               <el-dropdown-item icon="el-icon-warning" ><span>退出</span></el-dropdown-item>
@@ -59,7 +59,7 @@ export default {
   name: "Header",
   computed: {
     ...mapGetters([
-      'user',
+      'profile',
       'collapse',
       'shop'
     ]),
@@ -128,13 +128,14 @@ export default {
     },
     async logout() {
       await this.$store.dispatch('user/logout')
+      this.$store.dispatch('profile/clearUserId')
+      this.$store.dispatch('shop/clearStoreId')
+
       this.$router.push(`/login?redirect=${this.$route.fullPath}`)
     }
   },
   created(){
-    if( !this.shop.store_id ){
-      this.storeInfo();
-    }
+   
   }
 };
 </script>

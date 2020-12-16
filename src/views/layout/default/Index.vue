@@ -11,10 +11,10 @@
 </template>
 <script>
 
-import Header from './components/Header'
-import Footer from './components/Footer'
-import Aside from './components/Aside'
-import Main from './components/Main'
+import Header from './Header'
+import Footer from './Footer'
+import Aside from './Aside'
+import Main from './Main'
 
 export default {
   name:'layout',

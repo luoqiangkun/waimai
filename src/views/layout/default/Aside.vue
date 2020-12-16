@@ -228,8 +228,10 @@ export default {
    color: #a9b1b5;
   background-color: #001528 !important;
 }
-.aside .is-opened.is-active {
-  color: #FF5C00 !important;
+
+.aside .el-menu-item.is-active {
+  color: #a9b1b5;
+  background-color: #001528 !important;
 }
 
 

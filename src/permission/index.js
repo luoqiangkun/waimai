@@ -5,6 +5,7 @@ import { getLocalStorage,delLocalStorage} from '@/utils/storage'
 
 const whiteList = ['/login'] // no redirect whitelist
 router.beforeEach(async(to, from, next) => {
+ 
   // determine whether the user has logged in
   const ukey = getLocalStorage('ukey');
  
@@ -13,29 +14,32 @@ router.beforeEach(async(to, from, next) => {
       // if is logged in, redirect to the home page
       next({ path: '/' })
     } else {
-
       // get user ticket
-      let uid = store.getters.user.uid 
-      if (uid) {
-        next()
-      } else {
-        try {
-          // get user info
-          const { userInfo } = await store.dispatch('user/getInfo')
-
-          // get store info
-          const { storeInfo } = await store.dispatch('shop/storeInfo')
-
-          // set the replace: true, so the navigation will not leave a history record
-          //next()
-          next({ ...to, replace: true })
-        } catch (error) {
-          await store.dispatch('user/logout')
-          Message.error(error || 'Has Error')
-          next(`/login?redirect=${to.path}`)
+      let uid = store.getters.profile.userId
+      //获取用户信息    
+      try {
+        if( !uid ){
+          const userInfo = await store.dispatch('profile/userInfo')      
         }
+      } catch (error) {
+        await store.dispatch('user/logout')
+        Message.error(error || 'Has Error')
+        return next(`/login?redirect=${to.path}`)
       }
 
+      //获取店铺信息
+      try {
+       
+        if( !store.getters.shop.store_id ){
+          const storeInfo = await store.dispatch('shop/storeInfo')
+        }
+        
+      } catch (error) {
+        if( to.matched[0].path != '/settled' && to.matched[0].path != '/help' ){
+          return next({path:'/settled',replace:false})
+        }
+      }
+      next()
     }
   } else {
     /* has no ukey*/
