@@ -21,6 +21,7 @@ html , body {
 #app {
   height: 100%;
   position: relative;
+  overflow: scroll;
 }
 * {
   margin: 0;

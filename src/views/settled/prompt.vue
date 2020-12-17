@@ -124,6 +124,7 @@ export default {
     }
     .submit-box {
         margin-top: 20px;
+        text-align: center;
     }
     .submit-box .el-row {
         margin-bottom: 10px;

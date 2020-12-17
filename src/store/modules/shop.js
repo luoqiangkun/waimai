@@ -35,7 +35,6 @@ const actions = {
   storeInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
       storeInfo().then(response => {
-    
         let data = response.data
         if( response.status === 200 ){
           const { store_id, store_name, store_logo,store_is_open,store_site_logo } = data
@@ -46,13 +45,12 @@ const actions = {
             commit('SET_STORE_IS_OPEN', store_is_open)
             commit('SET_STORE_SITE_LOGO', store_site_logo)
           } else {
-            reject('店铺信息有误')
+            data = {}
           }
-          
+          resolve(data)
         } else {
-          reject('店铺信息有误')
+          reject(response.msg)
         }
-        resolve(data);
       }).catch(error => {
         reject(error)
       })

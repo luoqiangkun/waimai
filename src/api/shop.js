@@ -5,7 +5,7 @@ import {get,post} from '@/http/http'
 /**
  * 获取店铺信息
  */
-export const storeInfo = data => get('store/info',data);
+export const storeInfo = data => get('store/self',data);
 
 
 /**

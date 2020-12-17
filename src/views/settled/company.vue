@@ -131,7 +131,23 @@ export default {
                 { required: true, message: '请填写组织机构代码', trigger: 'blur' }
                 ]
             },
-            form:{
+            // form:{
+            //     companyName:'',
+            //     companyAddress:'',
+            //     companyTelephone:'',
+            //     authType:'',
+            //     uniCredit:'',
+            //     businessLicense:'',
+            //     organizationCode:'',
+            //     taxRegister:''
+            // },
+            uploadUrl:uploadUrl,
+            districtOptions:[],
+        }
+    },
+    computed: {
+        form () {
+            let form = {
                 companyName:'',
                 companyAddress:'',
                 companyTelephone:'',
@@ -140,15 +156,17 @@ export default {
                 businessLicense:'',
                 organizationCode:'',
                 taxRegister:''
-            },
-            uploadUrl:uploadUrl
+            }
+            if( this.$store.state.settled.company ){
+                form = this.$store.state.settled.company
+                if(form.companyAddress && form.companyAddress.length > 0){
+                    form.companyAddress = this.formatFormDistrict(form.companyAddress)
+                }
+            } 
+            return form
         }
     },
-    computed: {
-        settled () {
-            return this.$store.state.settled
-        }
-    },
+    
     methods:{
         formatDistrict(){
             var districtOptions = [];
@@ -216,12 +234,12 @@ export default {
     },
     created(){
         this.formatDistrict();
-        if(this.settled.company){
-            this.form = this.settled.company
-            if(this.form.companyAddress && this.form.companyAddress.length > 0){
-                this.form.companyAddress = this.formatFormDistrict(this.form.companyAddress)
-            }
-        }
+        // if(this.settled.company){
+        //     this.form = this.settled.company
+        //     if(this.form.companyAddress && this.form.companyAddress.length > 0){
+        //         this.form.companyAddress = this.formatFormDistrict(this.form.companyAddress)
+        //     }
+        // }
         this.$store.dispatch('settled/setStep',2)
     }
 }

@@ -59,9 +59,9 @@
             </el-alert>
 
              <el-alert
-                title="店铺已关闭"
+                title="店铺未开启"
                 type="error"
-                description="你的店铺已关闭，如有疑问，可找平台客服进行沟通"
+                description="你的店铺未开启或者已关闭，可联系平台未您开启"
                 show-icon
                 :center="center"
                 :closable="false"
@@ -81,11 +81,9 @@
         </div>
      
         <el-card shadow="never">
-            <p>1、审核结果会在1到2个工作日以短信的方式发送到你的手机，请注意查看</p>
-
+            <!-- <p>1、审核结果会在1到2个工作日以短信的方式发送到你的手机，请注意查看</p>
             <p>2、如果审核未通过，请参照审核失败原因进行修改，之后重新提交</p>
-
-
+ -->
         </el-card>
     </div>
     

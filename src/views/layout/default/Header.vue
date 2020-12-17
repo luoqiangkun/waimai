@@ -248,4 +248,7 @@ export default {
   color:#CCC;
   font-size:14px;
 }
+.head-topbar__item:hover {
+  background: red;
+}
 </style>

@@ -99,7 +99,22 @@ export default {
                 { required: true, message: '请填写开户支行名称', trigger: 'blur' }
                 ]
             },
-            form:{
+            // form:{
+            //     legalName:'',
+            //     legalPhone:'',
+            //     legalIdCardNo:'',
+            //     legalIdCardFront:'',
+            //     legalIdCardBack:'',
+            //     accountNo:'',
+            //     parentBankName:'',
+            //     bankName:''
+            // },
+            uploadUrl:uploadUrl
+        }
+    },
+    computed: {
+        form () {
+            let form = {
                 legalName:'',
                 legalPhone:'',
                 legalIdCardNo:'',
@@ -108,13 +123,11 @@ export default {
                 accountNo:'',
                 parentBankName:'',
                 bankName:''
-            },
-            uploadUrl:uploadUrl
-        }
-    },
-    computed: {
-        settled () {
-            return this.$store.state.settled
+            }
+            if( this.$store.state.settled.legal ){
+                form = this.$store.state.settled.legal
+            } 
+            return form
         }
     },
     methods:{
@@ -139,9 +152,6 @@ export default {
         }
     },
     created(){
-        if(this.settled.legal){
-            this.form = this.settled.legal
-        }
         this.$store.dispatch('settled/setStep',3)
     }
 }

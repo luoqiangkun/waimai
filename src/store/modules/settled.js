@@ -1,7 +1,10 @@
 
 import { settledData } from '@/api'
 const state = {
-    settledStep:-1
+    settledStep:-1,
+    store:null,
+    company:null,
+    legal:null
 }
 const mutations = {
   SET_SETTLED: (state, settled) => {
@@ -32,6 +35,7 @@ const actions = {
         const data = response.data
         if( response.status === 200 ){
           if( !Array.isArray(data) ){
+          
             commit('SET_SETTLED', data)
           } else {
             commit('SET_STEP', 0)

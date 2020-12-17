@@ -27,17 +27,22 @@ router.beforeEach(async(to, from, next) => {
         return next(`/login?redirect=${to.path}`)
       }
 
-      //获取店铺信息
+       //获取店铺信息
       try {
-       
         if( !store.getters.shop.store_id ){
           const storeInfo = await store.dispatch('shop/storeInfo')
+          if( !storeInfo.store_id ){
+            if( to.matched[0].path != '/settled' && to.matched[0].path != '/help' ){
+              return next({path:'/settled',replace:false})
+            } 
+          } else if( storeInfo.store_state_id != 3240 && storeInfo.store_is_open == 1 ){
+            return next({path:'/settled',replace:false})
+          }
         }
-        
       } catch (error) {
-        if( to.matched[0].path != '/settled' && to.matched[0].path != '/help' ){
-          return next({path:'/settled',replace:false})
-        }
+        await store.dispatch('user/logout')
+        Message.error(error || 'Has Error')
+        return next(`/login?redirect=${to.path}`)
       }
       next()
     }

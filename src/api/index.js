@@ -1,14 +1,5 @@
 import request from '@/utils/request'
 
-//check
-export function check() {
-  // return request({
-  //   url: 'account.php?ctl=Login&met=doLogin&typ=json',
-  //   method: 'post',
-  //   data:{redirect:window.location.href}
-  // })
-  window.location.href =  process.env.API_URL + 'index.php?ctl=Login&met=check&redirect=' + process.env.API_URL;
-}
 
 //用户登陆
 export function login(data) {
@@ -47,7 +38,7 @@ export function userInfo() {
 //获取店铺信息
 export function storeInfo() {
     return request({
-      url: 'index.php?ctl=Store&met=self&typ=json',
+      url: 'catering.php?ctl=Store_Base&met=self&typ=json',
       method: 'get'
     })
 }
@@ -78,7 +69,7 @@ export function settled(data){
 }
 
 //上传地址
-export var uploadUrl = process.env.UPLOAD_URL + 'index.php?ctl=Media&met=uploadImage&typ=json'
+export var uploadUrl = ApiUrl + '/index.php?ctl=Media&met=uploadImage&typ=json'
 
 
 //底部信息

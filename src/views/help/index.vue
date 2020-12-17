@@ -42,7 +42,7 @@ export default {
     
     },
     created(){
-        console.log( window.location.href );
+       
     }
 }
 </script>

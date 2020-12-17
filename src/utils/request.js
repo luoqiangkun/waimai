@@ -5,8 +5,9 @@ import { getCookie } from '@/utils/cookie'
 
 // create an axios instance
 const request = axios.create({
+    baseURL:ApiUrl + '/',
     //baseURL: process.env.API_URL, // api 的 base_url
-    baseURL:'/api/',
+    //baseURL:'/api/',
     timeout: 5000 // request timeout
   })
 
@@ -18,7 +19,7 @@ request.interceptors.request.use(
     if (getCookie('ukey') && getCookie('ukey') != 'undefined') {
         // 注意：config.method 的判断值必须是小写的post和get
         if (config.method === 'post') {
-            config.data = {
+            config.data ={
                 perm_key: getCookie('ukey'),
                 ...config.data
             }
@@ -42,6 +43,10 @@ request.interceptors.request.use(
                 ...config.params
             }
         }
+    }
+
+    if( config.method === 'post' ){
+      config.data = qs.stringify(config.data)
     }
     return config
   },

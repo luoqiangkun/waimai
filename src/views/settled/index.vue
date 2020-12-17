@@ -50,21 +50,19 @@ export default {
             } else if( this.settled.settledStep == 3 ){
                 this.$router.push("/settled/legal");
             }
+        },
+        async storeInfo(){
+            await this.$store.dispatch('common/storeInfo')
+        },
+        async settledData(){
+            await this.$store.dispatch('settled/settledData')
         }
     },
     created(){
-        //this.redirect();
-        // if( this.settled.settledStep == -1  ){
-        //     this.$store.dispatch('settled/settledData')
-        //     .then(res => {
-        //         this.redirect();
-        //     })
-        // } else {
-        //     this.redirect();
-        // }
+       
     },
     beforeRouteEnter (to, from, next) {
-       next(async(vm) => {
+        next(async(vm) => {
             if( !vm.$store.getters.common.store.loaded ){
                 await vm.$store.dispatch('common/storeInfo')
             }
@@ -73,7 +71,7 @@ export default {
             }
             vm.redirect();
         });
-    },
+    }
 }
 </script>
 <style scoped>

@@ -14,6 +14,9 @@
                 <el-menu-item index="99">
                     <a href="javascript:;" @click="redirectShop">商城首页</a>
                 </el-menu-item>
+                <el-menu-item index="98">
+                    <router-link to="/">商家中心</router-link>
+                </el-menu-item>
                 <el-menu-item :key="index" v-for="(item,index) in menus">
                     <router-link :to="item.path">
                         <el-button type="primary" size="mini" v-if="item.type == 'button'">{{item.title}}</el-button>
@@ -70,7 +73,7 @@ export default {
         }
     },
     created(){
-       
+     
     }
 }
 </script>

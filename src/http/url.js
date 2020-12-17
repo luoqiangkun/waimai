@@ -5,6 +5,7 @@ const ACCOUNTURL = ApiUrl + '/account.php';
 const VERSION = 'v1'; 
 const SYSURL = {
 		'store/info' :APIURL + '?ctl=Store_Base&met=info&typ=json',
+		'store/self' :APIURL + '?ctl=Store_Base&met=self&typ=json',
 		'store/edit' :APIURL + '?ctl=Store_Base&met=edit&typ=json',
 		'store/open' :APIURL + '?ctl=Store_Base&met=open&typ=json',
 		'store/config/info' : APIURL + '?ctl=Store_Config&met=info&typ=json',
@@ -73,7 +74,7 @@ const SYSURL = {
 
 		'info':APIURL + '?ctl=Index&met=info&typ=json',
 		//'login':ACCOUNTURL + '?ctl=Login&met=toLogin&typ=json',
-		'login':APIURL + '?ctl=Login&met=login&typ=json',
+		'login':APIURL + '?ctl=Login&met=storeLogin&typ=json',
 		'logout':APIURL + '?ctl=Login&met=logout&typ=json',
 		'register': APIURL + '?ctl=Login&met=register&typ=json',
 		'queue/lists' : APIURL + '?ctl=Queue&met=lists&typ=json',
