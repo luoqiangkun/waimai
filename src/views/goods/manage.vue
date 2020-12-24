@@ -229,8 +229,7 @@ export default {
         },
         rules: {
           goods_name: [
-            { required: true, message: '请输入活动名称', trigger: 'blur' },
-            { min: 3, max: 5, message: '长度在 3 到 50 个字符', trigger: 'blur' }
+            { required: true, message: '请输入活动名称', trigger: 'blur' }
           ],
           category_id: [
             { required: true, message: '请选择商品分类', trigger: 'change' }
