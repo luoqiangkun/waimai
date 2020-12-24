@@ -80,7 +80,8 @@ export default {
       getReturnData( data ){
         let params = {
           rows:10,
-          page:1
+          page:1,
+          from:'store'
         };
 
         Object.assign(params, data);

@@ -77,7 +77,7 @@
     </el-card>
 </template>
 <script>
-import { orderLists,returnLists } from '@/api/order'
+import { orderLists } from '@/api/order'
 export default {
     data() {
       return {
@@ -101,7 +101,8 @@ export default {
         let params = {
           order_id:this.order_title,
           rows:10,
-          page:1
+          page:1,
+          from:'store'
         };
 
         Object.assign(params, data);
@@ -112,22 +113,6 @@ export default {
           this.loading = false;
         })
       },
-      getReturnData( data ){
-        let params = {
-          return_id:this.return_id,
-          rows:10,
-          page:1
-        };
-
-        Object.assign(params, data);
-
-        this.loading = true;
-        returnLists( params ).then( res => {
-          this.returnData = res.data;
-          this.loading = false;
-        })
-      },
-
       changePage( page ){
         this.getOrderData({page:page})
       },
@@ -146,7 +131,6 @@ export default {
     },
     created(){
       this.getOrderData();
-      this.getReturnData();
     }
   };
 </script>
