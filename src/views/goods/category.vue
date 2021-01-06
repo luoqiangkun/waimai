@@ -41,7 +41,31 @@
             label="分类名称"
             align="center"
             prop="category_name">
+
+            <template slot-scope="scope">
+              <span>{{scope.row.category_name}}</span>
+              <el-tag size="mini" v-if="scope.row.category_property == 1">必须分类</el-tag>
+            </template>
+
           </el-table-column>
+          <el-table-column
+            label="分类图片"
+            align="center"
+            prop="category_image">
+            <template slot-scope="scope">
+              <el-image
+              style="width: 50px; height: 50px"
+              :src="scope.row.category_image"
+              fit="fill"></el-image>
+            </template>
+          </el-table-column>
+
+          <el-table-column
+            label="分类排序"
+            align="center"
+            prop="category_order">
+          </el-table-column>
+
           <el-table-column
             align="center"
             label="操作"
@@ -80,7 +104,7 @@
       </div>
       
 
-      <el-dialog title="商品分类" :visible.sync="dialogFormVisible" width="480px">
+      <el-dialog title="商品分类" :visible.sync="dialogFormVisible" width="600px">
         <el-form :model="form"  ref="form" 
         style="padding:0 40px 0 20px">
           <el-form-item label="分类名称" prop="category_name" label-width="80px">
@@ -97,6 +121,17 @@
             <img v-if="form.category_image" :src="form.category_image" class="image" />
             <i v-else class="el-icon-plus image-uploader-icon"></i>
           </el-upload>
+        </el-form-item>
+        <el-form-item label="分类属性" prop="category_property" label-width="80px">
+          <el-checkbox v-model="form.category_property">下单必选分类</el-checkbox>
+          <div style="line-height:20px;color:#999">
+            设置为下单必选分类时，顾客下单时必须选择改分类下至少一个商品才能成功下单，每个店铺只能设置一个必选分类
+          </div>
+         
+        </el-form-item>
+
+        <el-form-item label="分类排序" prop="category_order" label-width="80px">
+          <el-input v-model="form.category_order" autocomplete="off"></el-input>
         </el-form-item>
 
         </el-form>
@@ -125,7 +160,9 @@ export default {
         form : {
           category_id:0,
           category_name:'',
-          category_image:''
+          category_image:'',
+          category_property:0,
+          category_order:''
         },
         category_name:'',
         selection:[],
@@ -171,8 +208,16 @@ export default {
       
       handleCateAdd() {
           this.dialogFormVisible = true
+          this.form = {
+            category_id:0,
+            category_name:'',
+            category_image:'',
+            category_property:0,
+            category_order:''
+          }
       },
       handleCateEdit(index,row) {
+          row.category_property = row.category_property ? true : false
           this.form = row;
           this.dialogFormVisible = true
       },
@@ -226,6 +271,8 @@ export default {
         this.$refs[formName].validate((valid) => {
           if (valid) {
             if( this.form.category_id ){
+              let data = this.form
+              data.category_property = this.form.category_property ? 1 : 0
               cateEdit( this.form ).then( res => {
                 if( res.status === 200 ){
                   let i = this.getIndexById( res.data.category_id );

@@ -3,7 +3,7 @@
     <div class="formWrapper">
       <el-form ref="form" :model="form" :rules="rules">
         <el-form-item>
-          <div class="loginTitle">智能点餐商家登录</div>
+          <div class="loginTitle">外卖商家登录</div>
         </el-form-item>
         <el-form-item prop="user_account">
           <el-input v-model="form.user_account" placeholder="用户名" prefix-icon="el-icon-user"></el-input>
@@ -77,7 +77,7 @@ export default {
 }
 
 .loginTitle {
-  color: #409EFF;
+  color: #FF5C00;
   text-align: center;
   font-size: 23px;
   font-weight: 550;

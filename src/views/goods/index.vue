@@ -16,7 +16,7 @@
               <span slot="title">全部分类</span>
             </el-menu-item>
 
-            <el-menu-item :index="'t' + item.category_id" :key="'t' + item.category_id" v-for="item in cateData.items" >
+            <el-menu-item :index="'' + item.category_id" :key="item.category_id" v-for="item in cateData.items" >
               <span slot="title">{{item.category_name}}</span>
             </el-menu-item>
           </el-menu>

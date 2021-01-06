@@ -111,12 +111,20 @@
 			      	<el-input v-show="true" slot-scope="scope" v-model="scope.row.item_minimum" placeholder="起订量"/>
 			    </el-table-column>
 
+				<el-table-column
+			      label="打包盒"
+			      align="center"
+				  key="8"
+			    >
+			      	<el-input v-show="true" slot-scope="scope" v-model="scope.row.item_lunch_box_fee" placeholder="打包盒"/>
+			    </el-table-column>
+
 			    <el-table-column
 			      label="操作"
 			      align="center"
 			      width="80"
 			      v-if="showSpec"
-				  key="8"
+				  key="9"
 			    >
 			      <i class="el-icon-plus el-icon-delete" slot-scope="scope" @click="handleDelSpec(scope.$index)"></i>
 
@@ -322,16 +330,14 @@ export default {
     		}
     	},
     	fixAttribute( data ){
-    		
     		let fixData = [];
-    		let fixDataItem = {};
     		for( let i in data ){
+				let fixDataItem = {};
     			fixDataItem.name = data[i].name;
     			fixDataItem.items = [];
     			for( let k in data[i].items ){
     				fixDataItem.items.push( {key:data[i].items[k],value:data[i].items[k]})
     			}
-    			
     			fixData.push( fixDataItem );
     		}
 
@@ -387,7 +393,7 @@ export default {
 
 <style scoped>
 .manage {
-	width:800px;
+	width:900px;
 	margin:0 auto
 }
 .goods_image .image-uploader .el-upload {

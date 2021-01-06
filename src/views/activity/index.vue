@@ -272,6 +272,7 @@
   justify-content: flex-start;
   align-items: center;
   position: relative;
+  padding: 10px;
 }
 .block .icon {
   width: 55px;

@@ -131,10 +131,6 @@ export default {
             {
               index: "/config",
               title: "基本设置",
-            },
-            {
-              index: "/delivery",
-              title: "配送设置",
             }
           ]
         },

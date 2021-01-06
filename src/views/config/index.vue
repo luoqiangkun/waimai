@@ -90,6 +90,26 @@
             </el-input>
 					</el-form-item>
 
+          <div class="rule-content">
+              <el-form-item label="运费规则">
+                  <span>起送价</span>
+                  <el-input size="small" v-model="form.sc_freight_rules.starting_price"></el-input>
+                  <span>元，超过</span>
+                  <el-input size="small" v-model="form.sc_freight_rules.starting_distance"></el-input>
+                  <span>米,每增加</span>
+                  <el-input size="small" v-model="form.sc_freight_rules.increase_distance"></el-input>
+                  <span>米，增加运费</span>
+                  <el-input size="small" v-model="form.sc_freight_rules.increase_price"></el-input>
+                  <span>元</span>
+              </el-form-item>
+          </div>
+            <el-form-item label="配送方式">
+              <el-radio-group v-model="form.sc_delivery_type">
+                  <el-radio :label="1">骑手配送</el-radio>
+                  <el-radio :label="2">商家自配</el-radio>
+              </el-radio-group>
+          </el-form-item>
+
 					<el-form-item>
 						<el-button type="primary" size="small" @click="onSubmit3">保存</el-button>
 						<el-button size="small">取消</el-button>
@@ -100,6 +120,7 @@
       </div>
     </el-card>
 
+ 
   </div>
   
 </template>
@@ -126,6 +147,14 @@ export default {
             sc_min_money:''
 	        },
           sc_search_hot_words:[],
+          sc_freight_free:0,
+          sc_freight_rules:{
+              starting_price:'',
+              starting_distance:'',
+              increase_distance:'',
+              increase_price:''
+          },
+          sc_delivery_type:'1'
       	}
     },
     methods: {
@@ -140,7 +169,10 @@ export default {
               sc_search_hot_words:res.data.sc_search_hot_words,
               sc_meal_time:res.data.sc_meal_time,
               sc_service_radius:res.data.sc_service_radius,
-              sc_min_money:res.data.sc_min_money
+              sc_min_money:res.data.sc_min_money,
+              sc_freight_free:res.data.sc_freight_free,
+              sc_freight_rules:res.data.sc_freight_rules,
+              sc_delivery_type:res.data.sc_delivery_type
             };
 
             let sc_search_hot_words = [];
@@ -196,7 +228,10 @@ export default {
         let data = { 
           sc_service_radius:this.form.sc_service_radius,
           sc_meal_time:this.form.sc_meal_time,
-          sc_min_money:this.form.sc_min_money
+          sc_min_money:this.form.sc_min_money,
+          sc_freight_free:this.form.sc_freight_free,
+          sc_freight_rules:this.form.sc_freight_rules,
+          sc_delivery_type:this.form.sc_delivery_type
         };
 
         storeConfigSave( data ).then( res => {
@@ -233,5 +268,12 @@ export default {
     font-size: 14px;
     color: #8492a6;
     line-height: 44px;
+}
+.rule-content {
+    display: flex;
+}
+.rule-content .el-input{
+    width: 80px;
+    margin: 0 2px;
 }
 </style>

@@ -84,7 +84,7 @@
 
 					<el-form-item label="店铺地址">
 						<el-cascader
-						style="display:block"
+							style="display:block"
 							:options="districtOptions"
 							clearable
 							v-model="form.district_ids"
@@ -201,6 +201,8 @@ export default {
 					}
 					this.form.district_ids = district_ids;
 				}
+
+				console.log( this.form )
 
 				var fileList = [];
 				if( res.data.store_photo ){
