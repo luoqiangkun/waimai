@@ -125,7 +125,7 @@
         <el-form-item label="分类属性" prop="category_property" label-width="80px">
           <el-checkbox v-model="form.category_property">下单必选分类</el-checkbox>
           <div style="line-height:20px;color:#999">
-            设置为下单必选分类时，顾客下单时必须选择改分类下至少一个商品才能成功下单，每个店铺只能设置一个必选分类
+            设置为下单必选分类时，顾客下单时必须选择该分类下至少一个商品才能成功下单，每个店铺只能设置一个必选分类
           </div>
          
         </el-form-item>
