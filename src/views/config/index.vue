@@ -171,7 +171,12 @@ export default {
               sc_service_radius:res.data.sc_service_radius,
               sc_min_money:res.data.sc_min_money,
               sc_freight_free:res.data.sc_freight_free,
-              sc_freight_rules:res.data.sc_freight_rules,
+              sc_freight_rules:res.data.sc_freight_rules ? res.data.sc_freight_rules : {
+                starting_price:'',
+                starting_distance:'',
+                increase_distance:'',
+                increase_price:''
+              },
               sc_delivery_type:res.data.sc_delivery_type
             };
 

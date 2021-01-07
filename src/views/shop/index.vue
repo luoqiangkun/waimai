@@ -150,7 +150,6 @@ import { storeInfo,storeEdit  } from '@/api/shop'
 import {SYSURL} from '@/http/url'
 import { DownClass } from '@/utils/DownClass'
 import districtData from '@/data/districts'
-
 export default {
     data() {
       return {
@@ -201,8 +200,6 @@ export default {
 					}
 					this.form.district_ids = district_ids;
 				}
-
-				console.log( this.form )
 
 				var fileList = [];
 				if( res.data.store_photo ){
@@ -261,39 +258,47 @@ export default {
 			return new Date(2016, 9, 10,Number(arr[0]),Number(arr[1]));
 		},
 		formatDistrict(){
-			var districtOptions = [];
-			for( var i in districtData[100000]){
-			
-			districtOptions.push({
-				value:i,
-				label:districtData[100000][i],
-				children:[]
-			})
-			}
-
-			for( var n in districtOptions ){
-			if( districtData[districtOptions[n].value] ){
-				for( var m in districtData[districtOptions[n].value] ){
-				districtOptions[n].children.push({
-					value:m,
-					label:districtData[districtOptions[n].value][m],
+			var districtOptions = [
+				{
+					value:650000,
+					label:'新疆维吾尔自治区',
 					children:[]
-				})
+				}
+			];
+			for( var i in districtData[100000]){
+				if( i != 650000 ){
+					districtOptions.push({
+						value:i,
+						label:districtData[100000][i],
+						children:[]
+					})
 				}
 			}
+			
+
+			for( var n in districtOptions ){
+				if( districtData[districtOptions[n].value] ){
+					for( var m in districtData[districtOptions[n].value] ){
+					districtOptions[n].children.push({
+						value:m,
+						label:districtData[districtOptions[n].value][m],
+						children:[]
+					})
+					}
+				}
 			}
 
 			for( var i in districtOptions ){
-			for( var m in districtOptions[i].children ){
-				if( districtData[districtOptions[i].children[m].value] ){
-				for( var n in districtData[districtOptions[i].children[m].value] ){
-					districtOptions[i].children[m].children.push({
-					value:n,
-					label:districtData[districtOptions[i].children[m].value][n]
-					})
+				for( var m in districtOptions[i].children ){
+					if( districtData[districtOptions[i].children[m].value] ){
+					for( var n in districtData[districtOptions[i].children[m].value] ){
+						districtOptions[i].children[m].children.push({
+						value:n,
+						label:districtData[districtOptions[i].children[m].value][n]
+						})
+					}
+					}
 				}
-				}
-			}
 			}
 			this.districtOptions = districtOptions;
 		},

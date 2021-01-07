@@ -17,7 +17,11 @@
             </el-menu-item>
 
             <el-menu-item :index="'' + item.category_id" :key="item.category_id" v-for="item in cateData.items" >
-              <span slot="title">{{item.category_name}}</span>
+              <span slot="title">
+                {{item.category_name}}
+                <el-tag size="mini" v-if="item.category_property == 1">必须分类</el-tag>
+                </span>
+              
             </el-menu-item>
           </el-menu>
         </el-col>
