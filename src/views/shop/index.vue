@@ -164,7 +164,7 @@ export default {
 		  store_open_time:'',
 		  store_close_time:'',
 		  store_telephone:'',
-		  district_ids:["310000", "310100", "310112"],
+		  district_ids:["650000", "650100", "650102"],
 		  store_address:'',
 		  store_area:'',
 		  store_photo:[]
@@ -200,7 +200,7 @@ export default {
 					}
 					this.form.district_ids = district_ids;
 				}
-
+				
 				var fileList = [];
 				if( res.data.store_photo ){
 					for( var i in res.data.store_photo ){
@@ -260,7 +260,7 @@ export default {
 		formatDistrict(){
 			var districtOptions = [
 				{
-					value:650000,
+					value:"650000",
 					label:'新疆维吾尔自治区',
 					children:[]
 				}
@@ -275,7 +275,6 @@ export default {
 				}
 			}
 			
-
 			for( var n in districtOptions ){
 				if( districtData[districtOptions[n].value] ){
 					for( var m in districtData[districtOptions[n].value] ){
@@ -301,6 +300,7 @@ export default {
 				}
 			}
 			this.districtOptions = districtOptions;
+			console.log( districtOptions )
 		},
 		formatFormDistrict(storeDiscrict){
 			var newDistrice = []
