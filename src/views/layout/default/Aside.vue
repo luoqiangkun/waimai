@@ -68,12 +68,12 @@ export default {
             }
           ]
         },
-        // {
-        //   icon: "el-icon-s-platform",
-        //   index: "table",
-        //   title: "桌台管理",
+        {
+          icon: "el-icon-data-board",
+          index: "table",
+          title: "桌台管理",
 
-        // },
+        },
         {
           icon: "el-icon-goods",
           index: "/goods",
@@ -134,17 +134,17 @@ export default {
             }
           ]
         },
-        // {
-        //   icon: "el-icon-user",
-        //   index: "waiter",
-        //   title: "会员管理",
-        //   subs:[
-        //     {
-        //       index: "/waiter",
-        //       title: "角色设置",
-        //     }
-        //   ]
-        // }
+        {
+          icon: "el-icon-user",
+          index: "waiter",
+          title: "会员管理",
+          subs:[
+            {
+              index: "/waiter",
+              title: "角色设置",
+            }
+          ]
+        }
       ]
     };
   },

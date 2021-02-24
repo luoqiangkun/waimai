@@ -212,7 +212,7 @@ export default {
             category_id:0,
             category_name:'',
             category_image:'',
-            category_property:0,
+            category_property:false,
             category_order:''
           }
       },

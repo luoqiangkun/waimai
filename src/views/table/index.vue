@@ -14,11 +14,11 @@
                 style="width:auto"
               > 
       
-            <el-menu-item :index="0">
+            <el-menu-item index="t-0">
                 <span slot="title">全部类型</span>
             </el-menu-item>
 
-            <el-menu-item :index="item.type_id" v-for="(item,i) in typeData.items">
+            <el-menu-item  :index="'' + item.type_id" :key="item.type_id" v-for="item in typeData.items">
               <span slot="title">{{item.type_name}}</span>
             </el-menu-item>
           </el-menu>
@@ -97,7 +97,7 @@
 
           <el-form-item label="桌台类型" prop="table_type_id" label-width="80px">
             <el-select v-model="form.table_type_id" placeholder="请选择桌台类型" style="width:100%">
-              <el-option :label="item.type_name" :value="item.type_id" v-for="(item,i) in typeData.items"></el-option>
+              <el-option :label="item.type_name" :value="item.type_id" :key="i" v-for="(item,i) in typeData.items"></el-option>
             </el-select>
           </el-form-item>
 

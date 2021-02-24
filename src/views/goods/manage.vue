@@ -245,9 +245,6 @@ export default {
           goods_image: [
             { required: true, message: '请上传商品图片', trigger: 'change' }
           ],
-          goods_desc: [
-            { required: true, message: '请填写商品描述', trigger: 'blur' }
-          ],
           unit_id: [
             { required: true, message: '请选择商品单位', trigger: 'blur' }
           ]
