@@ -45,13 +45,14 @@
             <div class="block-content">
               <h3>收货及配送信息</h3>
               <div class="text-line"></div>
-
-              <div>收货人：{{orderData.delivery.da_contacter }}</div>
-              <div>收货地址：{{orderData.delivery.da_address}}</div>
-              <div>联系方式：{{orderData.delivery.da_mobile}}</div>
-              <div>预约电话：{{orderData.telephone}}</div>
-              <div>预约时间：{{orderData.pickup_time}}</div>
-
+              <template v-if="orderData.delivery">
+                <div>收货人：{{orderData.delivery.da_contacter }}</div>
+                <div>收货地址：{{orderData.delivery.da_address}}</div>
+                <div>联系方式：{{orderData.delivery.da_mobile}}</div>
+                <div>预约电话：{{orderData.telephone}}</div>
+                <div>预约时间：{{orderData.pickup_time}}</div>
+              </template>
+              
 
               <div class="text-line" v-if="orderData.delivery_type == 1 || orderData.delivery_type == 3"></div>
               <template v-if="orderData.delivery_type == 1">
