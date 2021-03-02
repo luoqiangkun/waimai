@@ -15,7 +15,7 @@
         <div class="goback" @click="goback"><i class="el-icon-back back"></i>返回上一级</div>
       </div>
       <div>
-        <el-form :model="form" :rules="rules" ref="form" label-width="200px">
+        <el-form :model="form" :rules="rules" ref="form" label-width="160px">
           <el-form-item label="活动名称" prop="activity_name">
             <el-col :span="18">
               <el-form-item prop="activity_name">
@@ -27,13 +27,13 @@
           <el-form-item label="活动时间" required>
             <el-col :span="8">
               <el-form-item prop="activity_starttime">
-                <el-date-picker type="date" placeholder="选择日期" v-model="form.activity_starttime" value-format="yyyy-MM-dd" size="small" style="width: 100%;"></el-date-picker>
+                <el-date-picker type="datetime" placeholder="选择日期" v-model="form.activity_starttime" value-format="yyyy-MM-dd HH:mm:ss" size="small" style="width: 100%;"></el-date-picker>
               </el-form-item>
             </el-col>
             <el-col class="line" :span="2">至</el-col>
             <el-col :span="8">
               <el-form-item prop="activity_endtime">
-                <el-date-picker  type="date" placeholder="选择日期" v-model="form.activity_endtime" value-format="yyyy-MM-dd" size="small" style="width: 100%;"></el-date-picker>
+                <el-date-picker  type="datetime" placeholder="选择日期" v-model="form.activity_endtime" value-format="yyyy-MM-dd HH:mm:ss" size="small" style="width: 100%;"></el-date-picker>
               </el-form-item>
             </el-col>
           </el-form-item>

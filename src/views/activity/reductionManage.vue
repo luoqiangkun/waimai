@@ -7,7 +7,7 @@
       </div>
 
       <div  v-loading="loading">
-        <el-form :model="form" :rules="rules" ref="form" label-width="200px">
+        <el-form :model="form" :rules="rules" ref="form" label-width="160px">
           <el-form-item label="活动名称" prop="activity_name">
             <el-col :span="18">
               <el-form-item prop="activity_name">
@@ -21,13 +21,13 @@
           <el-form-item label="活动时间" required>
             <el-col :span="8">
               <el-form-item prop="activity_starttime">
-                <el-date-picker type="date" placeholder="选择日期" value-format="yyyy-MM-dd" v-model="form.activity_starttime" size="small" style="width: 100%;"></el-date-picker>
+                <el-date-picker type="datetime" placeholder="选择日期" value-format="yyyy-MM-dd HH:mm:ss" v-model="form.activity_starttime" size="small" style="width: 100%;"></el-date-picker>
               </el-form-item>
             </el-col>
             <el-col class="line" :span="2">至</el-col>
             <el-col :span="8">
               <el-form-item prop="activity_endtime">
-                <el-date-picker  type="date" placeholder="选择日期" value-format="yyyy-MM-dd" v-model="form.activity_endtime" size="small" style="width: 100%;"></el-date-picker>
+                <el-date-picker  type="datetime" placeholder="选择日期" value-format="yyyy-MM-dd HH:mm:ss" v-model="form.activity_endtime" size="small" style="width: 100%;"></el-date-picker>
               </el-form-item>
             </el-col>
           </el-form-item>
