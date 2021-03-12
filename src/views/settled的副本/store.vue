@@ -153,18 +153,18 @@ export default {
           { required: true, message: '请上传店内环境照片', trigger: 'blur' }
         ]
       },
-      form: {
-        storeName: '',
-        storeCategory: '',
-        storeContactPerson: '',
-        storeContactNumber: '',
-        storeDiscrict: '',
-        storeAddress: '',
-        storeDoorPhoto: '',
-        storeInsidePhoto: '',
-        storeLongitude:'',
-        storeLatitude:''
-      },
+      // form: {
+      //   storeName: '',
+      //   storeCategory: '',
+      //   storeContactPerson: '',
+      //   storeContactNumber: '',
+      //   storeDiscrict: '',
+      //   storeAddress: '',
+      //   storeDoorPhoto: '',
+      //   storeInsidePhoto: '',
+      //   storeLongitude:'',
+      //   storeLatitude:''
+      // },
       categorylists:[],
       districtOptions:[],
       uploadUrl:uploadUrl,
@@ -178,11 +178,28 @@ export default {
     }
   },
   computed: {
-      settled () {
-          return this.$store.state.settled
+    form () {
+      let form = {
+        storeName: '',
+        storeCategory: '',
+        storeContactPerson: '',
+        storeContactNumber: '',
+        storeDiscrict: '',
+        storeAddress: '',
+        storeDoorPhoto: '',
+        storeInsidePhoto: '',
+        storeLongitude:'',
+        storeLatitude:''
       }
+      if( this.$store.state.settled.store ){
+          form = this.$store.state.settled.store
+          if(form.storeDiscrict && form.storeDiscrict.length > 0){
+            form.storeDiscrict = this.formatFormDistrict(form.storeDiscrict);
+          }
+      } 
+      return form
+    }
   },
-  
   methods: {
       initMap({BMap, map}) {
           var _this = this;
@@ -301,15 +318,7 @@ export default {
   created(){
     this.storeCategoryLists()
     this.formatDistrict()
-    if(this.settled.store){
-      this.form = this.settled.store
-      if(this.form.storeDiscrict && this.form.storeDiscrict.length > 0){
-        this.form.storeDiscrict = this.formatFormDistrict(this.form.storeDiscrict);
-      }
-    }
-
     this.$store.dispatch('settled/setStep',1)
-
   }
 }
 </script>

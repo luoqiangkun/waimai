@@ -35,6 +35,15 @@ export function userInfo() {
     })
 }
 
+
+//获取店铺信息
+export function config() {
+  return request({
+    url: 'catering.php?ctl=Index&met=config&typ=json',
+    method: 'get'
+  })
+}
+
 //获取店铺信息
 export function storeInfo() {
     return request({

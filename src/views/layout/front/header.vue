@@ -69,7 +69,7 @@ export default {
             this.$router.push(`/login?redirect=${this.$route.fullPath}`)
         },
         redirectShop(){
-            window.location.href = process.env.API_URL
+            window.location.href = ApiUrl
         }
     },
     created(){

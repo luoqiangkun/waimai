@@ -8,35 +8,62 @@
         <div class="block">
           <div class="block-content">
             <el-steps :active="active" finish-status="success" align-center>
-            <el-step>
-              <dl class="step-text" slot="title">
-                <dt>提交订单</dt>
-                <dd>{{orderData.order_time}}</dd>
-              </dl>
-            </el-step>
-            <el-step>
-              <dl class="step-text" slot="title">
-                <dt>买家付款</dt>
-                <dd v-if="active >= 2">{{orderData.payment_time}}</dd>
-              </dl>
-            </el-step>
-            <el-step>
-              <dl class="step-text" slot="title">
-                <dt>商家发货</dt>
-                <dd v-if="active >= 3">{{orderData.delivered_time}}</dd>
-              </dl>
-            </el-step>
-            <el-step>
-              <dl class="step-text" slot="title">
-                <dt>确认收货</dt>
-                <dd v-if="active >= 4">{{orderData.order_finish_time}}</dd>
-              </dl>
-            </el-step>
-            <el-step>
-              <dl class="step-text" slot="title">
-                <dt>评价订单</dt>
-              </dl>
-            </el-step>
+            <template v-if="orderData.delivery_type == 1">
+              <el-step>
+                <dl class="step-text" slot="title">
+                  <dt>提交订单</dt>
+                  <dd>{{orderData.order_time}}</dd>
+                </dl>
+              </el-step>
+              <el-step>
+                <dl class="step-text" slot="title">
+                  <dt>买家付款</dt>
+                  <dd v-if="active >= 2">{{orderData.payment_time}}</dd>
+                </dl>
+              </el-step>
+              <el-step>
+                <dl class="step-text" slot="title">
+                  <dt>商家发货</dt>
+                  <dd v-if="active >= 3">{{orderData.delivered_time}}</dd>
+                </dl>
+              </el-step>
+              <el-step>
+                <dl class="step-text" slot="title">
+                  <dt>确认收货</dt>
+                  <dd v-if="active >= 4">{{orderData.order_finish_time}}</dd>
+                </dl>
+              </el-step>
+              <el-step>
+                <dl class="step-text" slot="title">
+                  <dt>评价订单</dt>
+                </dl>
+              </el-step>
+            </template>
+            <template>
+              <el-step>
+                <dl class="step-text" slot="title">
+                  <dt>提交订单</dt>
+                  <dd>{{orderData.order_time}}</dd>
+                </dl>
+              </el-step>
+              <el-step>
+                <dl class="step-text" slot="title">
+                  <dt>买家付款</dt>
+                  <dd v-if="active >= 2">{{orderData.payment_time}}</dd>
+                </dl>
+              </el-step>
+              <el-step>
+                <dl class="step-text" slot="title">
+                  <dt>确认取货</dt>
+                  <dd v-if="active >= 4">{{orderData.order_finish_time}}</dd>
+                </dl>
+              </el-step>
+              <el-step>
+                <dl class="step-text" slot="title">
+                  <dt>评价订单</dt>
+                </dl>
+              </el-step>
+            </template>
             </el-steps>
           </div>
         </div>
@@ -93,7 +120,7 @@
                     <span v-else-if="orderData.delivery_type == 3">商家自配</span>
                 </div>
 
-                <template v-if="orderData.order_status === 2 || orderData.return_row">
+                <template v-if="orderData.order_status === 2 || orderData.order_status === 3 || orderData.return_row">
                   <div class="text-line"></div>
 
                   <div class="flex" style="margin-top:20px">
@@ -101,8 +128,10 @@
                         <el-button type="primary" size="mini" @click="modifyOrderStatus(orderData.order_id,3,orderData.index)">确认接单</el-button>
                         <el-button type="danger" size="mini" @click="modifyOrderStatus(orderData.order_id,6,orderData.index)">拒绝接单</el-button>
                     </template>
-                    <template v-if="orderData.order_status === 3 && orderData.delivery_type === 3">
-                      <el-button type="primary" size="mini" @click="dialogFormVisible = !dialogFormVisible">配送</el-button>
+                    
+                    <template v-if="orderData.order_status === 3">
+                      <el-button type="primary" size="mini" @click="dialogFormVisible = !dialogFormVisible" v-if="orderData.delivery_type === 3">配送</el-button>
+                      <el-button type="primary" size="mini" @click="pickUp" v-else-if="orderData.delivery_type === 2">确认取货</el-button>
                     </template>
                     <el-button type="info" size="mini" @click="returnDetail(orderData.return_row.return_id)" v-if="orderData.return_row">退款信息</el-button>
                   </div>
@@ -187,7 +216,7 @@
   
 </template>
 <script>
-import { orderDetail,orderStatus,modifyOrderStatus,shippingAdd } from '@/api/order'
+import { orderDetail,orderStatus,modifyOrderStatus,shippingAdd,pickUp } from '@/api/order'
 export default {
     data() {
       return {
@@ -271,6 +300,20 @@ export default {
       },
       returnDetail(id){
         this.$router.push("returnDetail/" + id);
+      },
+      pickUp(){
+        pickUp({order_id:this.order_id}).then( res => {
+          if( res.status === 200 ){
+            this.$message({
+              showClose: true,
+              message: '操作成功',
+              type: 'success'
+            });
+            this.orderData.order_status = res.data.order_status;
+          } else {
+            this.$message.error(res.msg);
+          }
+        })
       },
       goback() {
         this.$router.go(-1);

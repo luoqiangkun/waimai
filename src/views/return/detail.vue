@@ -28,7 +28,7 @@
 
                   <div class="flex" style="margin-top:20px" >
                     <el-button type="warning" size="mini" @click="modifyReturnState(2)">确认退单</el-button>
-                    <el-button type="danger" size="mini" @click="modifyReturnState(3)">拒绝退单</el-button>
+                    <el-button type="danger" size="mini" @click="modifyReturnState(5)">拒绝退单</el-button>
                   </div>
                 </template>
       
@@ -125,8 +125,8 @@ export default {
         })
       },
     
-       modifyReturnState(return_id,return_state_id ){
-        modifyReturnState({return_id:return_id,return_state_id:return_state_id}).then( res => {
+       modifyReturnState(return_state_id ){
+        modifyReturnState({return_id:this.return_id,return_state_id:return_state_id}).then( res => {
           if( res.status === 200 ){
             this.$message({
               showClose: true,

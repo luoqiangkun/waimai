@@ -57,7 +57,7 @@
           <el-collapse-item :title="item.category_name" :name="item.category_id">
             <div class="rectangle"  v-for="(row,i) in item.items">
               <div class="rectangle-l">
-                <img :src="row.item_image" class="image" />
+                <img :src="row.goods_image" class="image" />
               </div>
 
               <div class="rectangle-c">
@@ -94,7 +94,7 @@
                 label="商品图片"
               >
                 <template slot-scope="scope">
-                  <img :src="scope.row.item_image" class="image" width="80"/>
+                  <img :src="scope.row.goods_image" class="image" width="80"/>
                 </template>
               </el-table-column>
 
@@ -349,6 +349,7 @@
 }
 .rectangle .rectangle-c {
   flex-grow:1;
+  margin-left: 10px;
 }
 .top-block {
   margin-bottom:10px;

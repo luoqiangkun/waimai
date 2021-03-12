@@ -38,6 +38,7 @@ const SYSURL = {
 		'order/change_item' : APIURL + '?ctl=Order_Base&met=changeItemQuantity&typ=json',
 		'order/status' : APIURL + '?ctl=Order_Base&met=status&typ=json',
 		'order/modify_status' : APIURL + '?ctl=Order_Base&met=modifyOrderStatus&typ=json',
+		'order/pickup' : APIURL + '?ctl=Order_Base&met=pickUp&typ=json',
 		
 		'return/lists' :APIURL + '?ctl=Order_Return&met=lists&typ=json',
 		'return/detail'  :APIURL + '?ctl=Order_Return&met=detail&typ=json',

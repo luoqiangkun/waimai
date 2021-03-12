@@ -28,6 +28,13 @@ export const modifyOrderStatus = data => post('order/modify_status',data);
 
 
 /**
+ * 确认取货
+ */
+export const pickUp = data => post('order/pickup',data);
+
+
+
+/**
  * 配送
  */
 export const shippingAdd = data => post('shipping/add',data);
