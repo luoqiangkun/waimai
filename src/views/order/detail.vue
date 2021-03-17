@@ -39,7 +39,7 @@
                 </dl>
               </el-step>
             </template>
-            <template>
+            <template v-else>
               <el-step>
                 <dl class="step-text" slot="title">
                   <dt>提交订单</dt>
@@ -119,6 +119,7 @@
                     <span v-else-if="orderData.delivery_type == 2">到店自取</span>
                     <span v-else-if="orderData.delivery_type == 3">商家自配</span>
                 </div>
+                <div v-if="orderData.delivery_type == 1">配送状态：{{orderData.runner_state_name}}</div>
 
                 <template v-if="orderData.order_status === 2 || orderData.order_status === 3 || orderData.return_row">
                   <div class="text-line"></div>

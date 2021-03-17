@@ -14,7 +14,7 @@
             <td class="text-center" style="width:100px">实付金额</td>
             <td class="text-center" style="width:100px">支付方式</td>
             <td class="text-center" style="width:100px">订单状态</td>
-            <td class="text-center" style="width:100px">配送费用</td>
+            <td class="text-center" style="width:150px">配送信息</td>
             <td class="text-center" style="width:100px">买家信息</td>
             <td class="text-center" style="width:100px">操作</td>
           </tr>
@@ -50,8 +50,21 @@
             <td class="text-center bd-right" :rowspan="order.items.length" style="width:100px" v-if="key == 0">
               <el-tag size="medium">{{ order.order_status_name }}</el-tag>
             </td>
-            <td class="text-center bd-right" :rowspan="order.items.length" style="width:100px" v-if="key == 0">
-              {{order.freight}}
+            <td class="text-center bd-right" :rowspan="order.items.length" style="width:150px;" v-if="key == 0">
+              <p>配送方式：
+                <span v-if="order.delivery_type == 1">骑手配送</span>
+                <span v-else-if="order.delivery_type == 2">到店自取</span>
+                <span v-else-if="order.delivery_type == 3">商家自配</span>
+                <span v-else></span>
+              </p>
+              <template v-if="order.delivery_type == 1">
+                <p>配送状态：{{order.runner_state_name}}</p>
+                <p>配送费用：{{order.freight}} ¥</p>
+              </template>
+              <template v-if="order.delivery_type == 3">
+                <p>配送费用：{{order.freight}} ¥</p>
+              </template>
+              
             </td>
             <td class="text-center bd-right" :rowspan="order.items.length" style="width:100px" v-if="key == 0">
               {{order.buyer_name}}
