@@ -85,8 +85,8 @@ const SYSURL = {
 
 		'analytics/seller' : APIURL + '?ctl=Analytics&met=sellerData&typ=json',
 		'analytics/goods' : APIURL + '?ctl=Analytics&met=getGoodsNums&typ=json',
-
-		'upload':SITEURL + '?ctl=Media&met=uploadImage&typ=json'
+		'upload':SITEURL + '?ctl=Media&met=uploadImage&typ=json',
+		'print/order' : APIURL + '?ctl=Print&met=printOrder&typ=json',
 	}
 
 	export {

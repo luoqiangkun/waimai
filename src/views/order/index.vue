@@ -27,6 +27,7 @@
             <td colspan="7" class="bd-bottem">
               <span>{{order.order_id}}</span>
               <span>下单时间：{{order.order_time}}</span>
+            
             </td>
           </tr>
         </thead>
@@ -71,7 +72,14 @@
             </td>
 
             <td class="text-center bd-right" :rowspan="order.items.length" style="width:100px" v-if="key == 0">
-              <el-button size="mini" type="primary" @click="detail(order.order_id)">详情</el-button>
+                <div class="icon-action">
+                  <el-tooltip class="item" effect="dark" content="详情" placement="bottom">
+                    <i class="el-icon-tickets" @click="detail(order.order_id)"></i>
+                  </el-tooltip>
+                  <el-tooltip class="item" effect="dark" content="打印" placement="bottom">
+                    <i class="el-icon-printer" @click="print(order.order_id)"></i>
+                  </el-tooltip>
+                </div>
             </td>
 
           </tr>
@@ -90,7 +98,7 @@
     </el-card>
 </template>
 <script>
-import { orderLists } from '@/api/order'
+import { orderLists,printOrder} from '@/api/order'
 export default {
     data() {
       return {
@@ -140,6 +148,9 @@ export default {
       },
       goback() {
         this.$router.go(-1);
+      },
+      print(order_id){
+         printOrder( {order_id:order_id} );
       }
     },
     created(){
@@ -214,4 +225,10 @@ export default {
   width: 60px;
 }
 
+.icon-action i {
+    font-size: 20px;
+    color: #FF5C00;
+    cursor: pointer;
+    padding: 3px;
+}
 </style>

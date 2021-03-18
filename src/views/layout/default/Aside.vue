@@ -131,6 +131,10 @@ export default {
             {
               index: "/config",
               title: "基本设置",
+            },
+            {
+              index: "/api",
+              title: "打印设置",
             }
           ]
         },

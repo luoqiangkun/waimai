@@ -25,6 +25,8 @@ import comment from '@/views/comment'
 import commentDetail from '@/views/comment/detail'
 
 import config from '@/views/config'
+import api from '@/views/config/api'
+
 import waiter from '@/views/waiter'
 import delivery from '@/views/delivery'
 import error404 from '@/views/error/404'
@@ -163,6 +165,11 @@ export default new Router({
           path: 'config',
           name: 'config',
           component: config
+        },
+        {
+          path: 'api',
+          name: 'api',
+          component: api
         },
         {
           path: 'waiter',

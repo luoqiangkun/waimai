@@ -72,3 +72,5 @@ export const commentLists = data => get('comment/lists',data);
  * 获取评价详情
  */
 export const commentDetail = data => get('comment/detail',data);
+
+export const printOrder = data => get('print/order',data);
