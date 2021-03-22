@@ -186,7 +186,7 @@ export default {
         let params = {
           category_id:this.category_id,
           goods_name:this.goods_name,
-          rows:9,
+          rows:10,
           page:1
         };
 
@@ -223,7 +223,6 @@ export default {
         goodsState({goods_id:id,goods_state:goods_state}).then( res => {
           if( res.status === 200 ){
             let index = this.getIndexById( id );
-            console.log( index );
             this.fixGoodsState( index,goods_state );
           } else {
             this.$message.error(res.msg);
