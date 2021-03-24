@@ -3,8 +3,10 @@
       <div slot="header" class="clearfix" style="position:relative">
         <span>订单详情</span>
           <div class="goback" @click="goback"><i class="el-icon-back back"></i>返回</div>
+          
+          <div class="goback refresh" @click="refresh"><i class="el-icon-refresh"></i>刷新</div>
       </div>
-      <div class="container">
+      <div class="container" v-loading="loading">
         <div class="block">
           <div class="block-content">
             <el-steps :active="active" finish-status="success" align-center>
@@ -133,6 +135,7 @@
                     <template v-if="orderData.order_status === 3">
                       <el-button type="primary" size="mini" @click="dialogFormVisible = !dialogFormVisible" v-if="orderData.delivery_type === 3">配送</el-button>
                       <el-button type="primary" size="mini" @click="pickUp" v-else-if="orderData.delivery_type === 2">确认取货</el-button>
+                    
                     </template>
                     <el-button type="info" size="mini" @click="returnDetail(orderData.return_row.return_id)" v-if="orderData.return_row">退款信息</el-button>
                   </div>
@@ -318,6 +321,9 @@ export default {
       },
       goback() {
         this.$router.go(-1);
+      },
+      refresh(){
+        this.getOrderData()
       }
     },
     computed:{
@@ -397,5 +403,13 @@ export default {
   color:red;
   font-style:normal
 }
-
+.goback {
+  cursor: pointer;
+}
+.refresh {
+  margin-right: 10px;
+}
+.refresh i {
+   font-size: 18px;
+}
 </style>

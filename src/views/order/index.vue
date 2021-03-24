@@ -1,13 +1,14 @@
 <template>
-    <el-card class="box-card">
+    <el-card class="box-card" v-loading="loading">
       <el-row class="clearfix">
         <div class="searh-row flex">
           <el-input size="small" v-model="order_title" placeholder="请输入订单编号" style="width:200px"></el-input>
           <el-button size="small" type="info" plain @click="getOrderData">搜索</el-button>
+           <el-button size="small" @click="handleRefresh" icon="el-icon-refresh">刷新</el-button>
         </div>
       </el-row>
 
-      <table class="table" style="border:0">
+      <table class="table" style="border:0" >
         <thead>
           <tr class="bg-dark">
             <td>商品信息</td>
@@ -151,7 +152,10 @@ export default {
       },
       print(order_id){
          printOrder( {order_id:order_id} );
-      }
+      },
+       handleRefresh(){
+        this.getOrderData();
+      },
     },
     created(){
       this.getOrderData();
