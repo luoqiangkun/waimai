@@ -225,6 +225,9 @@ export default {
       	let chart4 = this.$echarts.init(document.getElementById("chart4"));
 
   		chart1.setOption({
+			tooltip: {
+				trigger: 'axis'
+			},
 	        xAxis: {
 	          	type: "category",
 	          	boundaryGap: false,
@@ -273,6 +276,9 @@ export default {
 
 
       	chart2.setOption({
+			tooltip: {
+				trigger: 'axis'
+			},
 	        xAxis: {
 	          	type: "category",
 	          	boundaryGap: false,
@@ -320,6 +326,9 @@ export default {
       	});
 
       	chart3.setOption({
+			tooltip: {
+				trigger: 'axis'
+			},
 	        xAxis: {
 	          	type: "category",
 	          	boundaryGap: false,
@@ -426,8 +435,6 @@ export default {
     },
     drawChart(){
     	let t = this;
-    	
-
     	let chart4 = this.$echarts.init(document.getElementById("chart4"));
 	   
     }

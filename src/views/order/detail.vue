@@ -281,7 +281,7 @@ export default {
       onSubmit( formName ) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            this.form.order_id = this.orderInfoData.order_id;
+            this.form.order_id = this.order_id;
             shippingAdd( this.form ).then( res => {
               if( res.status === 200 ){
                 this.$message({
@@ -290,7 +290,8 @@ export default {
                   type: 'success'
                 });
 
-                this.orderListsData.items[this.orderInfoData.index].order_status = res.data.order_status;
+                this.getOrderData();
+            
               } else {
                 this.$message.error(res.msg);
               }

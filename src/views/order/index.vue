@@ -1,11 +1,47 @@
 <template>
     <el-card class="box-card" v-loading="loading">
-      <el-row class="clearfix">
-        <div class="searh-row flex">
-          <el-input size="small" v-model="order_title" placeholder="请输入订单编号" style="width:200px"></el-input>
-          <el-button size="small" type="info" plain @click="getOrderData">搜索</el-button>
-           <el-button size="small" @click="handleRefresh" icon="el-icon-refresh">刷新</el-button>
-        </div>
+      <el-row class="clearfix bg-dark" style="padding:20px 20px 0 20px">
+        <el-form :inline="true" :model="form" class="demo-form-inline">
+          <div>
+            <el-form-item label="订单日期：">
+              <el-date-picker
+                v-model="form.order_starttime"
+                type="datetime"
+                size="small"
+                format="yyyy-MM-dd HH:mm:ss"
+                placeholder="开始日期">
+              </el-date-picker>
+              <span>~</span>
+              <el-date-picker
+                v-model="form.order_endtime"
+                type="datetime"
+                size="small"
+                format="yyyy-MM-dd HH:mm:ss"
+                placeholder="结束日期">
+              </el-date-picker>
+            </el-form-item>
+            <el-form-item label="订单状态：">
+              <el-select v-model="form.order_status" placeholder="订单状态" size="small">
+                <el-option label="待付款" value="1"></el-option>
+                <el-option label="待确认" value="2"></el-option>
+                <el-option label="待配送" value="3"></el-option>
+                <el-option label="待收货" value="4"></el-option>
+                <el-option label="已完成" value="5"></el-option>
+                <el-option label="已取消" value="6"></el-option>
+              </el-select>
+            </el-form-item>
+          </div>
+          <div>
+            <el-form-item label="订单编号：">
+              <el-input size="small" v-model="form.order_title" placeholder="请输入订单编号" style="width:200px"></el-input>
+            </el-form-item>
+             <el-form-item>
+              <el-button size="small" type="info" plain @click="getOrderData">搜索</el-button>
+              <el-button size="small" @click="handleRefresh" icon="el-icon-refresh">刷新</el-button>
+            </el-form-item>
+          </div>
+        </el-form>
+
       </el-row>
 
       <table class="table" style="border:0" >
@@ -61,10 +97,10 @@
               </p>
               <template v-if="order.delivery_type == 1">
                 <p>配送状态：{{order.runner_state_name}}</p>
-                <p>配送费用：{{order.freight}} ¥</p>
+                <p>配送费用：{{order.freight}}¥</p>
               </template>
               <template v-if="order.delivery_type == 3">
-                <p>配送费用：{{order.freight}} ¥</p>
+                <p>配送费用：{{order.freight}}¥</p>
               </template>
               
             </td>
@@ -73,14 +109,23 @@
             </td>
 
             <td class="text-center bd-right" :rowspan="order.items.length" style="width:100px" v-if="key == 0">
-                <div class="icon-action">
+                <!-- <div class="icon-action">
                   <el-tooltip class="item" effect="dark" content="详情" placement="bottom">
                     <i class="el-icon-tickets" @click="detail(order.order_id)"></i>
                   </el-tooltip>
                   <el-tooltip class="item" effect="dark" content="打印" placement="bottom">
                     <i class="el-icon-printer" @click="print(order.order_id)"></i>
                   </el-tooltip>
-                </div>
+                </div> -->
+
+                <el-row>
+                  <el-button type="primary" size="mini"  @click="detail(order.order_id)">操作</el-button>
+                </el-row>
+
+                <el-row style="margin-top:10px">
+                  <el-button size="mini"  @click="print(order.order_id)">打印</el-button>
+                </el-row>
+
             </td>
 
           </tr>
@@ -103,6 +148,13 @@ import { orderLists,printOrder} from '@/api/order'
 export default {
     data() {
       return {
+        form: {
+          order_starttime:'',
+          order_endtime:'',
+          order_status: '',
+          order_id: '',
+          date:''
+        },
         orderData : {
           page:1,
           records:0,
@@ -127,7 +179,7 @@ export default {
           from:'store'
         };
 
-        Object.assign(params, data);
+        Object.assign(params, this.form,data);
 
         this.loading = true;
         orderLists( params ).then( res => {
