@@ -53,9 +53,9 @@
       <div>
       <el-row :gutter="100">
       <el-col :span="8">
-        <el-collapse v-model="activeName" accordion v-for="(item,i) in cateGoodsData">
+        <el-collapse v-model="activeName" accordion :key="index" v-for="(item,index) in cateGoodsData">
           <el-collapse-item :title="item.category_name" :name="item.category_id">
-            <div class="rectangle"  v-for="(row,i) in item.items">
+            <div class="rectangle" :key="i" v-for="(row,i) in item.items">
               <div class="rectangle-l">
                 <img :src="row.goods_image" class="image" />
               </div>

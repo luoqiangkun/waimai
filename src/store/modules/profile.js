@@ -1,4 +1,3 @@
-
 import { userInfo } from '@/api'
 const state = {
   userId:0,

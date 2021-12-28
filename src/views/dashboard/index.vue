@@ -11,7 +11,7 @@
 	          <div class="per"> <i :class="seller.amount_per > 0 ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i> {{seller.amount_per}}%</div>
 	        </div>
 	    </el-card>
-	  	
+
 	  </el-col>
 	  <el-col :span="6">
 	  	<el-card shadow="hover" class="box-card box-card-purple">
@@ -28,7 +28,7 @@
 	  	<el-card shadow="hover" class="box-card box-card-cyan">
 		    <div class="title"><i class="circular-ring"></i> 今日顾客(个)</div>
 	        <div class="count">
-	          <div class="num">	
+	          <div class="num">
 	          	{{seller.customer}}
 	          	</div>
 	          <div class="per"> <i :class="seller.customer_per > 0 ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i> {{seller.customer_per}}%</div>
@@ -39,7 +39,7 @@
 	  	<el-card shadow="hover" class="box-card box-card-orange">
 		    <div class="title"><i class="circular-ring"></i> 人均消费数(元)</div>
 	        <div class="count">
-	          <div class="num">	          	
+	          <div class="num">
 	          	{{seller.average}}
 	          	</div>
 	          <div class="per"> <i :class="seller.average_per > 0 ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i> {{seller.average_per}}%</div>
@@ -52,35 +52,35 @@
 		<el-col :span="8">
 			<el-card class="chart-card">
 				<div class="header">
-					<h4>订单交易额统计</h4>					
+					<h4>订单交易额统计</h4>
 				</div>
 				<div class="content" >
 					<div id="chart1" style="width:100%;height:250px"></div>
-				</div> 
-				
+				</div>
+
 			</el-card>
 		</el-col>
 		<el-col :span="8">
 			<el-card class="chart-card">
 				<div class="header">
-					<h4>订单交易数统计</h4>					
+					<h4>订单交易数统计</h4>
 				</div>
 				<div class="content" >
 					<div id="chart2" style="width:100%;height:250px"></div>
-				</div> 
-				
+				</div>
+
 			</el-card>
 		</el-col>
 		<el-col :span="8">
 			<el-card class="chart-card">
 				<div class="header">
 					<h4>顾客统计</h4>
-					
+
 				</div>
 				<div class="content" >
 					<div id="chart3" style="width:100%;height:250px"></div>
-				</div> 
-				
+				</div>
+
 			</el-card>
 		</el-col>
 	</el-row>
@@ -119,11 +119,11 @@
 					    >
 					    	<template slot-scope="scope">
 					    		<el-avatar :src="scope.row.item_image"></el-avatar>
-					            
+
 					        </template>
 					    </el-table-column>
 					    <el-table-column
-					      
+
 					      prop="item_name"
 					      label="商品名称"
 					    >
@@ -141,12 +141,12 @@
 					      width="150">
 					    </el-table-column>
 					  </el-table>
-				</div> 
-				
+				</div>
+
 			</el-card>
 		</el-col>
 
-		
+
 	</el-row>
   </div>
 </template>
@@ -168,7 +168,7 @@ export default {
   	getSellerData(){
       analyticsSeller({year:this.value3}).then( res => {
         this.seller = res.data;
-        
+
         this.drawLine();
       })
     },
@@ -195,7 +195,7 @@ export default {
     	let series_data1 = [];
     	let series_data2 = [];
     	let series_data3 = [];
-    	
+
     	for( let i in this.seller.series ){
     		xAxis_data.push( this.seller.series[i].date );
     		series_data1.push( this.seller.series[i].amount );
@@ -206,7 +206,7 @@ export default {
     	let legend_data = [];
 	    let series_data = [];
 	    let color = ['#3EC7FE','#FF6A7D','#FFCF72','#C572FE'];
-	      
+
 	    for( let i in this.seller.goods ){
 	        legend_data.push( this.seller.goods[i].item_name );
 	        series_data.push({
@@ -261,7 +261,7 @@ export default {
 	            areaStyle: {
 	                normal:{
 			           //颜色渐变函数 前四个参数分别表示四个位置依次为左、下、右、上
-			            color: new t.$echarts.graphic.LinearGradient(0, 0, 0, 1, [{ 
+			            color: new t.$echarts.graphic.LinearGradient(0, 0, 0, 1, [{
 
 			                offset: 0,
 			                color: '#8bbbec'
@@ -312,7 +312,7 @@ export default {
 	            areaStyle: {
 	                normal:{
 			           //颜色渐变函数 前四个参数分别表示四个位置依次为左、下、右、上
-			            color: new t.$echarts.graphic.LinearGradient(0, 0, 0, 1, [{ 
+			            color: new t.$echarts.graphic.LinearGradient(0, 0, 0, 1, [{
 
 			                offset: 0,
 			                color: '#b3b5f3'
@@ -362,7 +362,7 @@ export default {
 	            areaStyle: {
 	                normal:{
 			           //颜色渐变函数 前四个参数分别表示四个位置依次为左、下、右、上
-			            color: new t.$echarts.graphic.LinearGradient(0, 0, 0, 1, [{ 
+			            color: new t.$echarts.graphic.LinearGradient(0, 0, 0, 1, [{
 
 			                offset: 0,
 			                color: '#96f0f5'
@@ -383,7 +383,7 @@ export default {
 	        legend: {
 	          orient: "vertical",
 	          icon: "circle",
-	          
+
 	           x: 'center', // 'center' | 'left' | {number},
        		   y: 'bottom', // 'center' | 'bottom' | {number}
 
@@ -436,7 +436,7 @@ export default {
     drawChart(){
     	let t = this;
     	let chart4 = this.$echarts.init(document.getElementById("chart4"));
-	   
+
     }
   },
   mounted() {
@@ -496,21 +496,21 @@ export default {
     background-size: 100%;
     background-position: 50%;
     background-repeat: no-repeat;
-	
+
 }
 .box-card-purple .circular-ring{
     background:url('../../assets/images/purple.png');
     background-size: 100%;
     background-position: 50%;
     background-repeat: no-repeat;
-	
+
 }
 .box-card-cyan .circular-ring{
     background:url('../../assets/images/cyan.png');
     background-size: 100%;
     background-position: 50%;
     background-repeat: no-repeat;
-	
+
 }
 .box-card-orange .circular-ring{
     background:url('../../assets/images/orange.png');;

@@ -36,17 +36,16 @@ a {
   color: #333;
   text-decoration: none;
 }
-
-.goback{
+.goback {
   display: inline-block;
-	float:right;
+	float: right;
   vertical-align: middle;
   color: #FF5C00;
 }
 .back{
   font-size: 21px;
   vertical-align: middle;
-  color: ##FF5C00;
+  color: #FF5C00;
 }
 .el-steps--simple {
   padding-top: 20px;

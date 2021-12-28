@@ -341,6 +341,7 @@ export default {
     		return fixData;
     	},
       	submitForm(formName) {
+			
       		let goods_attribute = [];
       		for( let i in this.goods_attribute ){
       			goods_attribute[i] = {};
@@ -351,6 +352,16 @@ export default {
       			}
       		}
       		this.form.goods_attribute = goods_attribute;
+			for( var i = 0; i < this.form.items.length; i++ ){
+		
+				if( this.form.items[i].item_price <= 0 ){
+					this.$message({
+						message: '商品价格有误',
+						type: 'error'
+					});
+					return false;
+				}
+			}
 	        this.$refs[formName].validate((valid) => {
 	          if (valid) {
 	            goodsAdd( this.form ).then( res => {

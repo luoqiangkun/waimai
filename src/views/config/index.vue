@@ -106,7 +106,7 @@
             <el-form-item label="配送方式">
               <el-radio-group v-model="form.sc_delivery_type">
                   <el-radio :label="1">骑手配送</el-radio>
-                  <el-radio :label="2">商家自配</el-radio>
+                  <el-radio :label="3">商家自配</el-radio>
               </el-radio-group>
           </el-form-item>
 

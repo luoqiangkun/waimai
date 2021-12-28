@@ -18,7 +18,6 @@ const mutations = {
   SET_AVATAR: (state, avatar) => {
     state.user.avatar = avatar
   },
-
   CLEAR_UID: (state) => {
     state.user.uid = 0
   }
@@ -31,22 +30,17 @@ const actions = {
     return new Promise((resolve, reject) => {
       login({ user_account: user_account, user_password: user_password }).then(res => {
         if( res.status == 200 ){
-
           const { user_id, user_account, user_avator,key } = res.data
-
           commit('SET_NAME', user_account)
           commit('SET_AVATAR', user_avator)
           commit('SET_UID', user_id )
-
           setLocalStorage('uid',user_id,24 * 365 * 5 )
           setLocalStorage('ukey',key,24 * 365 * 5 )
-          
           resolve( res.data )
-
         } else {
           reject(res.msg)
         }
-        
+
       }).catch(error => {
         reject(error)
       })
@@ -81,7 +75,7 @@ const actions = {
   logout({ commit, state, dispatch }) {
     return new Promise((resolve, reject) => {
       logout().then(response => {
-       
+
         const data = response.data
         commit('CLEAR_UID' )
         delLocalStorage('uid');

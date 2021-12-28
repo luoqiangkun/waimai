@@ -75,7 +75,7 @@
               <h3>收货及配送信息</h3>
               <div class="text-line"></div>
               <template v-if="orderData.delivery">
-                <div>收货人：{{orderData.delivery.da_contacter }}</div>
+                <div>收货人：{{orderData.delivery.da_name }}</div>
                 <div>收货地址：{{orderData.delivery.da_address}}</div>
                 <div>联系方式：{{orderData.delivery.da_mobile}}</div>
                 <div>预约电话：{{orderData.telephone}}</div>
@@ -121,6 +121,9 @@
                     <span v-else-if="orderData.delivery_type == 2">到店自取</span>
                     <span v-else-if="orderData.delivery_type == 3">商家自配</span>
                 </div>
+                <div>
+                  订单备注：{{orderData.order_remark}}
+                </div>
                 <div v-if="orderData.delivery_type == 1">配送状态：{{orderData.runner_state_name}}</div>
 
                 <template v-if="orderData.order_status === 2 || orderData.order_status === 3 || orderData.return_row">
@@ -165,6 +168,19 @@
                 label="商品名称"
                 align="center"
                 prop="item_name">
+                <template slot-scope="scope">
+                  <dl>
+                    <dt>{{scope.row.item_name}}</dt>
+                    <dd>
+                      <span v-if="scope.row.item_spec">{{scope.row.item_spec}}</span>
+                    </dd>
+                    <dd>
+                      <template v-if="scope.row.order_item_attribute && scope.row.order_item_attribute.length > 0">
+                        <span :key="i" v-for="(item,i) in scope.row.order_item_attribute">{{item.value}}</span>
+                      </template>
+                    </dd>
+                  </dl>
+                </template>
             </el-table-column>
             <el-table-column
                 label="商品单价"

@@ -1,6 +1,7 @@
   
 import {get,post} from '@/http/http'
-
+import {SYSURL} from '@/http/url'
+import { getCookie } from '@/utils/cookie'
 /**
  * 获取订单列表
  */
@@ -18,6 +19,19 @@ export const orderDetail = data => get('order/detail',data);
  */
 export const orderStatus = data => get('order/status',data);
 
+/**
+ * 修改订单状态
+ */
+ export const orderImport = function(data){
+    let params = '';
+    data.perm_id = getCookie('uid');
+    data.perm_key = encodeURIComponent(getCookie('ukey'));
+    for( let i in data){
+        params+="&"+i+"="+data[i]
+    }
+ 
+    window.location.href = SYSURL['order/import'] + params;
+ };
 
 
 /**

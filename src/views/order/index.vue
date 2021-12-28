@@ -9,6 +9,7 @@
                 type="datetime"
                 size="small"
                 format="yyyy-MM-dd HH:mm:ss"
+                value-format="yyyy-MM-dd HH:mm:ss"
                 placeholder="开始日期">
               </el-date-picker>
               <span>~</span>
@@ -17,6 +18,7 @@
                 type="datetime"
                 size="small"
                 format="yyyy-MM-dd HH:mm:ss"
+                value-format="yyyy-MM-dd HH:mm:ss"
                 placeholder="结束日期">
               </el-date-picker>
             </el-form-item>
@@ -37,6 +39,7 @@
             </el-form-item>
              <el-form-item>
               <el-button size="small" type="info" plain @click="getOrderData">搜索</el-button>
+              <el-button size="small" @click="oImport">导出</el-button>
               <el-button size="small" @click="handleRefresh" icon="el-icon-refresh">刷新</el-button>
             </el-form-item>
           </div>
@@ -144,7 +147,7 @@
     </el-card>
 </template>
 <script>
-import { orderLists,printOrder} from '@/api/order'
+import { orderLists,printOrder,orderImport} from '@/api/order'
 export default {
     data() {
       return {
@@ -152,8 +155,7 @@ export default {
           order_starttime:'',
           order_endtime:'',
           order_status: '',
-          order_id: '',
-          date:''
+          order_id: ''
         },
         orderData : {
           page:1,
@@ -205,7 +207,10 @@ export default {
       print(order_id){
          printOrder( {order_id:order_id} );
       },
-       handleRefresh(){
+      oImport(){
+        orderImport( this.form )
+      },
+      handleRefresh(){
         this.getOrderData();
       },
     },

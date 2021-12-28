@@ -5,10 +5,9 @@ import { getLocalStorage,delLocalStorage} from '@/utils/storage'
 
 const whiteList = ['/login'] // no redirect whitelist
 router.beforeEach(async(to, from, next) => {
- 
   // determine whether the user has logged in
   const ukey = getLocalStorage('ukey');
- 
+
   if (ukey) {
     if (to.path === '/login') {
       // if is logged in, redirect to the home page
@@ -16,17 +15,16 @@ router.beforeEach(async(to, from, next) => {
     } else {
       // get user ticket
       let uid = store.getters.profile.userId
-      //获取用户信息    
+      //获取用户信息
       try {
         if( !uid ){
-          const userInfo = await store.dispatch('profile/userInfo')      
+          const userInfo = await store.dispatch('profile/userInfo')
         }
       } catch (error) {
         await store.dispatch('user/logout')
         Message.error(error || 'Has Error')
         return next(`/login?redirect=${to.path}`)
       }
-
        //获取店铺信息
       try {
         if( !store.getters.shop.store_id ){
@@ -34,7 +32,7 @@ router.beforeEach(async(to, from, next) => {
           if( !storeInfo.store_id ){
             if( to.matched[0].path != '/settled' && to.matched[0].path != '/help' ){
               return next({path:'/settled',replace:false})
-            } 
+            }
           } else if( storeInfo.store_state_id != 3240 && storeInfo.store_is_open == 1 ){
             return next({path:'/settled',replace:false})
           }
@@ -59,5 +57,5 @@ router.beforeEach(async(to, from, next) => {
 })
 
 router.afterEach(() => {
-  
+
 })

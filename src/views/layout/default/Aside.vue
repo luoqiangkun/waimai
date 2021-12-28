@@ -138,17 +138,17 @@ export default {
             }
           ]
         },
-        {
-          icon: "el-icon-user",
-          index: "waiter",
-          title: "会员管理",
-          subs:[
-            {
-              index: "/waiter",
-              title: "角色设置",
-            }
-          ]
-        }
+        // {
+        //   icon: "el-icon-user",
+        //   index: "waiter",
+        //   title: "会员管理",
+        //   subs:[
+        //     {
+        //       index: "/waiter",
+        //       title: "角色设置",
+        //     }
+        //   ]
+        // }
       ]
     };
   },
