@@ -1,4 +1,4 @@
-  
+
 import {get,post} from '@/http/http'
 
 
@@ -6,6 +6,13 @@ import {get,post} from '@/http/http'
  * 获取店铺信息
  */
 export const storeInfo = data => get('store/self',data);
+
+/**
+ * 检查店铺状态
+ * @param data
+ * @returns {*}
+ */
+export const storeCheck = data => get('store/check',data);
 
 
 /**

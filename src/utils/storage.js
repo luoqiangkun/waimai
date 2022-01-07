@@ -1,4 +1,3 @@
-
 import Cookies from 'js-cookie'
 // create WebStorageCache instance.
 

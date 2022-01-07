@@ -7,6 +7,7 @@ const SYSURL = {
 		'store/self' :APIURL + '?ctl=Store_Base&met=self&typ=json',
 		'store/edit' :APIURL + '?ctl=Store_Base&met=edit&typ=json',
 		'store/open' :APIURL + '?ctl=Store_Base&met=open&typ=json',
+    'store/check' :APIURL + '?ctl=Store_Base&met=check&typ=json',
 		'store/config/info' : APIURL + '?ctl=Store_Config&met=info&typ=json',
 		'store/config/save' : APIURL + '?ctl=Store_Config&met=save&typ=json',
 		'store/config/logo' : APIURL + '?ctl=Store_Config&met=logo&typ=json',

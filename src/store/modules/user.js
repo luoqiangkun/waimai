@@ -29,13 +29,15 @@ const actions = {
     const { user_account, user_password } = userInfo
     return new Promise((resolve, reject) => {
       login({ user_account: user_account, user_password: user_password }).then(res => {
+        
         if( res.status == 200 ){
-          const { user_id, user_account, user_avator,key } = res.data
+        
+          const { uid, user_account, user_avator,ukey } = res.data
           commit('SET_NAME', user_account)
           commit('SET_AVATAR', user_avator)
-          commit('SET_UID', user_id )
-          setLocalStorage('uid',user_id,24 * 365 * 5 )
-          setLocalStorage('ukey',key,24 * 365 * 5 )
+          commit('SET_UID', uid )
+          setLocalStorage('uid',uid,24 * 365 * 5 )
+          setLocalStorage('ukey',ukey,24 * 365 * 5 )
           resolve( res.data )
         } else {
           reject(res.msg)

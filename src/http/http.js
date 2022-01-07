@@ -19,6 +19,7 @@ export function get(url, params){
 	if( getLocalStorage('ukey') ){
 		params.perm_key = getLocalStorage('ukey');
 	}
+	console.log( params )
   	return new Promise((resolve, reject) =>{ 
  		axios.get(url, {  
   	   		params: params 

@@ -1,5 +1,5 @@
 
-import { storeInfo } from '@/api/shop'
+import { storeInfo,storeCheck } from '@/api/shop'
 const state = {
   shop: {
     store_id:'',
@@ -72,6 +72,26 @@ const actions = {
   },
   clearStoreId({ commit }) {
     commit('CLEAR_STORE_ID')
+  },
+  storeCheck({ commit, state }) {
+    return new Promise((resolve, reject) => {
+      storeCheck().then(response => {
+        let data = response.data
+        if( response.status === 200 ){
+          const { store_id, store_name, store_logo,store_is_open,store_site_logo } = data
+          commit('SET_STORE_ID', store_id)
+          commit('SET_STORE_NAME', store_name)
+          commit('SET_STORE_LOGO', store_logo)
+          commit('SET_STORE_IS_OPEN', store_is_open)
+          commit('SET_STORE_SITE_LOGO', store_site_logo)
+          resolve(data)
+        } else {
+          reject(response.msg)
+        }
+      }).catch(error => {
+        reject(error)
+      })
+    })
   },
 }
 
